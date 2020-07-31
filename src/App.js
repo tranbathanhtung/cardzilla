@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useMemo } from "react";
+
+import { DefaultTemplate } from "templates";
+// import template from "fixtures/default";
+import { SettingDrawer } from "./common/SettingDrawer";
+
+const template = { name: "default" }
 
 function App() {
+  const TemplateChild = useMemo(() => {
+    switch (template.name) {
+      case "default":
+        return <DefaultTemplate />;
+      default:
+        return null;
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-gray-50 relative w-screen h-screen flex items-center justify-center">
+      <SettingDrawer className="absolute top-4 right-4" />
+      {TemplateChild}
     </div>
   );
 }

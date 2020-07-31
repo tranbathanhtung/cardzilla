@@ -3,18 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reach/auto-id": "^0.10.5",
+    "@reach/dialog": "^0.10.5",
+    "@tailwindcss/typography": "^0.2.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "classnames": "^2.2.6",
+    "jszip": "^3.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-hook-form": "^6.2.0",
+    "react-scripts": "3.4.1",
+    "react-spring": "^8.0.27",
+    "recoil": "^0.0.10"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "watch:css": "postcss src/styles/tailwind.css -o src/styles/index.css -w",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +39,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.5",
+    "customize-cra": "^1.0.0",
+    "postcss-cli": "^7.1.1",
+    "raw-loader": "^4.0.1",
+    "react-app-rewired": "^2.1.6",
+    "tailwindcss": "^1.5.2"
   }
 }
