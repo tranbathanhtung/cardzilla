@@ -1,23 +1,20 @@
 import * as React from "react";
 
-import {
-  Input as CharkaInput,
-  FormControl,
-  FormLabel,
-} from "components";
+import { Select as CharkaSelect, FormControl, FormLabel } from "components";
 
-const Input = ({ register, name, isDisabled, label, ...rest }) => {
+const Select = ({ register, name, isDisabled, label, ...rest }) => {
   return (
     <FormControl isDisabled={isDisabled}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <CharkaInput
+      <CharkaSelect
         ref={register()}
         id={name}
         name={name}
+        rootProps={{}}
         {...rest}
       />
     </FormControl>
   );
 };
 
-export default Input;
+export default Select;

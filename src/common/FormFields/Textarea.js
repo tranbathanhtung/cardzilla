@@ -1,16 +1,16 @@
 import * as React from "react";
 
 import {
-  Input as CharkaInput,
+  Textarea as CharkaTextarea,
   FormControl,
   FormLabel,
 } from "components";
 
-const Input = ({ register, name, isDisabled, label, ...rest }) => {
+const Textarea = ({ register, name, isDisabled, label, ...rest }) => {
   return (
     <FormControl isDisabled={isDisabled}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <CharkaInput
+      <CharkaTextarea
         ref={register()}
         id={name}
         name={name}
@@ -20,4 +20,4 @@ const Input = ({ register, name, isDisabled, label, ...rest }) => {
   );
 };
 
-export default Input;
+export default Textarea;
