@@ -1,8 +1,9 @@
 import React from "react";
 import { memo } from "react";
 import { useRecoilValue } from "recoil";
+import { IconButton, Divider, Box, Flex } from "@chakra-ui/core";
 
-import { IconButton, Divider } from "components";
+// import { IconButton, Divider } from "components";
 import { ChevronLeft, MapPin, Mail, Phone } from "icons";
 import * as S from "data/template";
 

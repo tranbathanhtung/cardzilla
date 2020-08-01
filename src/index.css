@@ -19,3 +19,23 @@ code {
 .hide-scrollbar::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
 }
+
+.absolute {
+  position: absolute;
+}
+
+.w-full {
+  width: 100%;
+} 
+.h-full {
+  height: 100%;
+} 
+.top-0 {
+  top: 0;
+} 
+.left-0 {
+  left: 0;
+} 
+.bottom-0 {
+  bottom: 0;
+}

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Box } from "@chakra-ui/core";
 
 import { StackController } from "./context/Stack";
 import { ProfileStack, DetailStackContainer } from "./Stacks";
@@ -6,15 +7,12 @@ import { ProfileStack, DetailStackContainer } from "./Stacks";
 
 const DefaultTemplate = () => {
   return (
-    <div
-      className="w-md bg-white rounded-md shadow-lg relative overflow-hidden prose"
-      style={{ height: "750px" }}
-    >
+    <Box w="md" h="750px" bg="white" rounded="md" shadow="lg" position="relative" overflow="hidden">
       <StackController>
         <ProfileStack />
         <DetailStackContainer />
       </StackController>
-    </div>
+    </Box>
   );
 };
 

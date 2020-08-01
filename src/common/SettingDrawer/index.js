@@ -17,7 +17,7 @@ import {
   TabPanel,
   Button,
   RadioButtonGroup,
-} from "components";
+} from "@chakra-ui/core";
 import { useDisclosure } from "hooks/useDisclosure";
 import { Settings, Check } from "icons";
 
@@ -128,7 +128,7 @@ const ColorSetting = () => {
   );
 };
 
-export const SettingDrawer = ({ className }) => {
+export const SettingDrawer = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 
@@ -140,9 +140,8 @@ export const SettingDrawer = ({ className }) => {
         variant="solid"
         aria-label="Settings"
         ref={btnRef}
-        className={className}
-        style={{ position: "absolute" }}
         onClick={onOpen}
+        {...props}
       >
         <Settings size={18} />
       </IconButton>

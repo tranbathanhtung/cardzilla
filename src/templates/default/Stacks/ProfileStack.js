@@ -11,7 +11,9 @@ import {
   Tag,
   TagLabel,
   Link,
-} from "components";
+  Flex,
+  Col,
+} from "@chakra-ui/core";
 import {
   Facebook,
   Instagram,
