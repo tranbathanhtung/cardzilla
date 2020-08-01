@@ -63,5 +63,6 @@ export const fetchGithubUser = async (username) => {
   }
   const res = await fetcher({ login: username });
   const data = await res.json();
-  console.log(data);
+  
+  return data.data.user;
 }

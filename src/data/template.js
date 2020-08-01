@@ -46,6 +46,26 @@ export const github = selector({
   },
 });
 
+export const dev = selector({
+  key: "dev",
+  get: ({ get }) => {
+    const template = get(templateState);
+    return template.config.dev;
+  },
+  set: ({ get, set }, dev) => {
+    const template = get(templateState);
+    const newTemplate = {
+      ...template,
+      config: {
+        ...template.config,
+        dev
+      },
+    };
+
+    set(templateState, newTemplate);
+  },
+});
+
 
 export const contact = selector({
   key: "contact",

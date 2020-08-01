@@ -1,5 +1,5 @@
 import * as React from "react";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 
@@ -14,22 +14,55 @@ import {
 import * as S from "data/template";
 import { fetchGithubUser } from "api/github";
 
+import { RepoFields } from "./RepoFields";
+
+const normalizeUser = (user) => {
+  return {
+    username: user.username,
+    htmlUrl: user.url,
+    followers: user.followers?.totalCount,
+    following: user.following?.totalCount,
+    starredRepositories: user.starredRepositories?.totalCount,
+    sponsorUrl: `https://github.com/sponsor/${user.username}`,
+    repos: user.pinnedItems?.nodes?.map((item) => ({
+      name: item.name,
+      htmlUrl: item.url,
+      description: item.description,
+      language: item.primaryLanguage?.name,
+      languageColor: item.primaryLanguage?.color,
+      star: item.stargazers?.totalCount,
+      fork: item.forkCount,
+    })),
+  };
+};
+
 export const GithubForm = memo(({ onClose }) => {
   const [github, setGithub] = useRecoilState(S.github);
-  const { register, handleSubmit, control, getValues } = useForm({
+  const { register, handleSubmit, control, getValues, reset } = useForm({
     defaultValues: github,
   });
 
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = (data) => {
+    console.log({ data })
     setGithub(data);
     onClose();
   };
 
-  const handleLoadGithubUsername = useCallback(() => {
-    const username = getValues("username");
-    console.log({ username });
-    fetchGithubUser(username);
-  }, [getValues]);
+  const handleLoadGithubUsername = useCallback(async () => {
+    try {
+      setLoading(true);
+      const username = getValues("username");
+      const user = await fetchGithubUser(username);
+      setLoading(false);
+      const githubConfig = normalizeUser({ username, ...user });
+      console.log({ user, githubConfig })
+      reset(githubConfig);
+    } catch (err) {
+      console.log(err)
+    }
+  }, [getValues, reset]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -42,13 +75,15 @@ export const GithubForm = memo(({ onClose }) => {
             id="username"
             name="username"
             placeholder="Enter your github username"
-            className="pr-24"
+            className="pr-16"
           />
-          <InputRightElement className="w-24">
+          <InputRightElement className="w-16 !px-0">
             <Button
-              variantColor="gray"
+              variantColor="teal"
               size="sm"
               onClick={handleLoadGithubUsername}
+              isLoading={loading}
+              isDisabled={loading}
             >
               Load
             </Button>
@@ -97,6 +132,17 @@ export const GithubForm = memo(({ onClose }) => {
         name="htmlUrl"
         placeholder=""
       />
+
+      <Input
+        type="hidden"
+        variant="filled"
+        ref={register()}
+        id="sponsorUrl"
+        name="sponsorUrl"
+        placeholder=""
+      />
+
+      <RepoFields control={control} register={register} />
 
       <Button className="mt-4" variantColor="gray" type="submit">
         Preview

@@ -39,14 +39,14 @@ export default {
       followers: 59,
       following: 49,
       starredRepositories: 480,
-      followUrl: "https://github.com/tranbathanhtung",
-      sponsorUrl: "",
+      sponsorUrl: "https://github.com/sponsor/tranbathanhtung",
       repos: [
         {
           name: "tailzilla-app",
           htmlUrl: "https://github.com/tranbathanhtung/react-fiber-implement",
           description: "re-implement react fiber",
           language: "Javascript",
+          languageColor: "#f1e05a",
           star: 508,
           fork: 26
         },
@@ -55,6 +55,7 @@ export default {
           htmlUrl: "https://github.com/tranbathanhtung/react-fiber-implement",
           description: "re-implement react fiber",
           language: "Javascript",
+          languageColor: "#f1e05a",
           star: 508,
           fork: 26
         },
@@ -63,6 +64,7 @@ export default {
           htmlUrl: "https://github.com/tranbathanhtung/react-fiber-implement",
           description: "re-implement react fiber",
           language: "Javascript",
+          languageColor: "#f1e05a",
           star: 508,
           fork: 26
         },
@@ -70,20 +72,19 @@ export default {
     },
     // Dev Stack
     dev: {
-      username: "",
+      username: "tranbathanhtung",
       htmlUrl: "",
-      followers: 59,
-      following: 49,
-      reactions: 480,
-      followUrl: "",
-      posts: [
+      // followers: 59,
+      // following: 49,
+      // reactions: 480,
+      // followUrl: "",
+      articles: [
         {
-          name: "How I learn code on internet and get my first job?",
+          title: "How I learn code on internet and get my first job?",
           htmlUrl: "",
           description: "Published: Aug 19 '18",
           reaction: 508,
           comment: 508,
-          view: 26
         },
       ],
     },

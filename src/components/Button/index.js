@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import classNames from "classnames";
 
 import { useButtonClasses } from "./styles";
-// import Spinner from "../Spinner";
+import Spinner from "../Spinner";
 
 const Button = forwardRef(
   (
@@ -45,7 +45,7 @@ const Button = forwardRef(
         {...rest}
       >
        {leftIcon && !isLoading ? leftIcon : null}
-        {/* {isLoading && (
+        {isLoading && (
           <Spinner
             className={classNames(
               loadingText ? "relative" : "absolute",
@@ -53,7 +53,7 @@ const Button = forwardRef(
             )}
             size="sm"
           />
-        )} */}
+        )}
         {isLoading
           ? loadingText || (
               <span className="opacity-0">

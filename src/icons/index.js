@@ -20,6 +20,8 @@ export { default as Settings } from "./settings";
 export { default as X } from "./x";
 export { default as ChevronDown } from "./chevron-down";
 export { default as Trash2 } from "./trash-2";
+export { default as Check } from "./check";
+
 
 
 

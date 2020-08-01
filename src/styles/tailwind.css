@@ -5,3 +5,22 @@
 @tailwind utilities;
 
 @tailwind screens;
+
+@keyframes spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  @apply inline-block border-2 border-current border-solid rounded-full text-current;
+}
+
+.spin {
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  animation: spin-animation 0.45s linear infinite;
+}

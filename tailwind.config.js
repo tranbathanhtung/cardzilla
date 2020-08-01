@@ -221,6 +221,7 @@ module.exports = {
     margin: ["responsive", "important"],
     cursor: ["hover", "focus", "disabled"],
     opacity: ["hover", "focus", "disabled"],
+    textDecoration: ["important"],
     typography: [],
   },
   plugins: [
