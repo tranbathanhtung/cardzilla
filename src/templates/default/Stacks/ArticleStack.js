@@ -14,31 +14,33 @@ const Article = memo(({ article }) => (
     href={article.htmlUrl}
     target="_blank"
   >
-    <div className="flex w-full mb-3 px-2 bg-gray-50 rounded-md shadow hover:shadow-lg cursor-pointer transition-shadow duration-200">
+    <div className="flex w-full mb-3 px-2 bg-gray-50 dark:bg-gray-800 rounded-md shadow hover:shadow-lg cursor-pointer transition-shadow duration-200">
       <div className="flex p-3 w-full">
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between relative">
-            <Link className="text-xl font-normal text-gray-600">
+            <h5 className="text-xl font-semibold text-gray-700 dark:text-gray-200 underline">
               {article.title}
-            </Link>
-            <ChevronRight />
+            </h5>
+            <div className="flex h-full mt-4">
+              <ChevronRight size={24} />
+            </div>
           </div>
           <p className="!my-2">{article.description}</p>
           <div className="flex !my-2">
-            <Link className="flex items-center !no-underline">
-              <Heart size={18} className="mr-2 text-pink-500" />
+            <div className="flex items-center !no-underline">
+              <Heart size={18} className="mr-2 text-pink-600 dark:text-pink-300" />
               <span>{article.reaction}</span>
-            </Link>
+            </div>
             <span aria-hidden="true" className="mx-3">
               ·
             </span>
-            <Link className="flex items-center !no-underline">
+            <div className="flex items-center !no-underline">
               <MessageCircle
                 size={18}
-                className="mr-2 text-gray-600 text-opacity-80"
+                className="mr-2 text-gray-600 text-opacity-80 dark:text-gray-300"
               />
               <span>{article.comment}</span>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -15,43 +15,45 @@ const GithubRepo = memo(({ repo }) => (
     href={repo.htmlUrl}
     target="_blank"
   >
-    <div className="flex w-full mb-3 px-2 bg-gray-50 rounded-md shadow hover:shadow-lg cursor-pointer transition-shadow duration-200">
+    <div className="flex w-full mb-3 px-2 bg-gray-50 dark:bg-gray-800 rounded-md shadow hover:shadow-lg cursor-pointer transition-shadow duration-200">
       <div className="flex p-3 w-full">
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between relative">
-            <Link className="text-xl font-normal text-gray-600 no-underline">
+            <h5 className="text-xl font-semibold text-gray-700 dark:text-gray-200 underline">
               {repo.name}
-            </Link>
-            <ChevronRight />
+            </h5>
+            <div className="flex h-full mt-4">
+              <ChevronRight size={24} />
+            </div>
           </div>
           <p className="!my-2">{repo.description}</p>
           <div className="flex !my-2">
             {repo.language && (
               <>
-                <span className="inline-flex items-center">
+                <div className="inline-flex items-center">
                   <span
                     className="w-3 h-3 rounded-full inline-block mr-2"
                     style={{ backgroundColor: repo.languageColor }}
                   ></span>
                   <span>{repo.language}</span>
-                </span>
+                </div>
                 <span aria-hidden="true" className="mx-3">
                   ·
                 </span>
               </>
             )}
 
-            <Link className="flex items-center !no-underline">
-              <Star size={18} className="mr-2 text-gray-600 text-opacity-80" />
+            <div className="flex items-center !no-underline">
+              <Star size={18} className="mr-2 text-gray-600 text-opacity-80 dark:text-gray-300" />
               <span>{repo.star}</span>
-            </Link>
+            </div>
             <span aria-hidden="true" className="mx-3">
               ·
             </span>
-            <Link className="flex items-center !no-underline">
-              <Fork size={18} className="mr-2 text-gray-600 text-opacity-80" />
+            <div className="flex items-center !no-underline">
+              <Fork size={18} className="mr-2 text-gray-600 text-opacity-80 dark:text-gray-300" />
               <span>{repo.fork}</span>
-            </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -94,7 +96,7 @@ const GithubStack = memo(() => {
             href={`${github.htmlUrl}?tab=followers`}
             target="_blank"
           >
-            <People size={18} className="mr-2 text-gray-700 text-opacity-80" />
+            <People size={18} className="mr-2 text-gray-700 text-opacity-80 dark:text-gray-300" />
             <span>{github.followers} followers</span>
           </Link>
           <span aria-hidden="true" className="mx-4">
@@ -115,14 +117,18 @@ const GithubStack = memo(() => {
             href={`${github.htmlUrl}?tab=stars`}
             target="_blank"
           >
-            <Star size={18} className="mr-2 text-gray-700 text-opacity-80" />
+            <Star size={18} className="mr-2 text-gray-700 text-opacity-80 dark:text-gray-300" />
             <span>{github.starredRepositories}</span>
           </Link>
         </div>
 
         <div className="my-3">
           <ButtonGroup className="flex flex-no-wrap">
-            <Link href={github.htmlUrl} target="_blank" className="w-1/2 !no-underline">
+            <Link
+              href={github.htmlUrl}
+              target="_blank"
+              className="w-1/2 !no-underline"
+            >
               <Button variantColor="gray" className="w-full">
                 Follow
               </Button>

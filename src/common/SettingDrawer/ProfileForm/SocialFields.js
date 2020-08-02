@@ -1,4 +1,5 @@
 import * as React from "react";
+import { memo } from "react";
 import { useFieldArray } from "react-hook-form";
 import { Trash2 } from "react-feather";
 
@@ -10,6 +11,7 @@ import {
   Select,
   IconButton,
 } from "components";
+import { useTheme } from "context/ThemeContext";
 
 const socialTypes = [
   {
@@ -30,7 +32,8 @@ const socialTypes = [
   },
 ];
 
-export const SocialFields = ({ control, register }) => {
+export const SocialFields = memo(({ control, register }) => {
+  const { color } = useTheme();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "socials",
@@ -88,9 +91,9 @@ export const SocialFields = ({ control, register }) => {
           </li>
         ))}
       </ul>
-      <Button onClick={append} className="w-full" variantColor="pink">
+      <Button onClick={append} className="w-full" variantColor={color}>
         Add Socials
       </Button>
     </div>
   );
-};
+});

@@ -1,10 +1,11 @@
 import * as React from "react";
+import { memo } from "react";
 import { useFieldArray } from "react-hook-form";
 import { Trash2 } from "react-feather";
 
 import { Input, FormControl, FormLabel, IconButton } from "components";
 
-export const RepoFields = ({ control, register }) => {
+export const RepoFields = memo(({ control, register }) => {
   const { fields, remove } = useFieldArray({
     control,
     name: "repos",
@@ -110,4 +111,4 @@ export const RepoFields = ({ control, register }) => {
   
     </div>
   );
-};
+});

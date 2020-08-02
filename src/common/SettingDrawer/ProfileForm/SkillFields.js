@@ -1,4 +1,5 @@
 import * as React from "react";
+import { memo } from "react";
 import { useFieldArray } from "react-hook-form";
 import { Trash2 } from "react-feather";
 
@@ -10,6 +11,7 @@ import {
   Select,
   IconButton,
 } from "components";
+import { useTheme } from "context/ThemeContext";
 
 const colors = [
   "gray",
@@ -24,7 +26,8 @@ const colors = [
   "pink",
 ];
 
-export const SkillFields = ({ control, register }) => {
+export const SkillFields = memo(({ control, register }) => {
+  const { color } = useTheme();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "skills",
@@ -82,9 +85,9 @@ export const SkillFields = ({ control, register }) => {
           </li>
         ))}
       </ul>
-      <Button onClick={append} className="w-full" variantColor="pink">
+      <Button onClick={append} className="w-full" variantColor={color}>
         Add skill
       </Button>
     </div>
   );
-};
+});

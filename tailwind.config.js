@@ -1,6 +1,93 @@
+const selectorParser = require("postcss-selector-parser");
+
+function darkMode() {
+  return function ({ addVariant, theme, e, prefix }) {
+    const darkSelector = theme("darkSelector", ".mode-dark");
+    addVariant("dark", ({ modifySelectors, separator }) => {
+      modifySelectors(({ className }) => {
+        return `${darkSelector} .${e(`dark${separator}${className}`)}`;
+      });
+    });
+
+    addVariant("dark:hover", ({ modifySelectors, separator }) => {
+      modifySelectors(({ className }) => {
+        return `${darkSelector} .${e(
+          `dark:hover${separator}${className}`
+        )}:hover`;
+      });
+    });
+
+    addVariant("dark:focus", ({ modifySelectors, separator }) => {
+      modifySelectors(({ className }) => {
+        return `${darkSelector} .${e(
+          `dark:focus${separator}${className}`
+        )}:focus`;
+      });
+    });
+
+    addVariant("dark:active", ({ modifySelectors, separator }) => {
+      modifySelectors(({ className }) => {
+        return `${darkSelector} .${e(
+          `dark:active${separator}${className}`
+        )}:active, .${e(
+          `dark:active${separator}${className}`
+        )}[data-active=true]`;
+      });
+    });
+
+    addVariant("dark:disabled", ({ modifySelectors, separator }) => {
+      modifySelectors(({ className }) => {
+        return `${darkSelector} .${e(
+          `dark:disabled${separator}${className}`
+        )}:disabled`;
+      });
+    });
+
+    addVariant("dark:placeholder", ({ modifySelectors, separator }) => {
+      modifySelectors(({ className }) => {
+        return `${darkSelector} .${e(
+          `dark:placeholder${separator}${className}`
+        )}::placeholder`;
+      });
+    });
+
+    addVariant("dark:selected", ({ modifySelectors, separator }) => {
+      modifySelectors(({ className }) => {
+        return `${darkSelector} .${e(
+          `dark:selected${separator}${className}`
+        )}[aria-selected=true]`;
+      });
+    });
+
+    addVariant("dark:typography", ({ modifySelectors, separator }) => {
+      modifySelectors(({ selector }) => {
+        return selectorParser((selectors) => {
+          selectors.walkClasses((sel) => {
+            sel.value = `dark:typography${separator}${sel.value}`;
+            sel.parent.insertBefore(
+              sel,
+              selectorParser().astSync(prefix(".mode-dark "))
+            );
+          });
+        }).processSync(selector);
+      });
+    });
+  };
+}
+
+const darkVariants = [
+  "dark",
+  "dark:hover",
+  "dark:focus",
+  "dark:active",
+  "dark:placeholder",
+  "dark:disabled",
+];
+
 module.exports = {
   purge: [],
   theme: {
+    darkSelector: ".mode-dark",
     colors: {
       transparent: "transparent",
       current: "currentColor",
@@ -176,6 +263,53 @@ module.exports = {
       full: "100%",
       screen: "100vw",
     }),
+    typography: (theme) => ({
+      dark: {
+        css: {
+          color: theme("colors.gray.300"),
+          '[class~="lead"]': {
+            color: theme("colors.gray.400"),
+          },
+          blockquote: {
+            color: theme("colors.gray.300"),
+            borderLeftColor: theme("colors.gray.700"),
+          },
+          hr: {
+            borderTopColor: theme("colors.gray.800"),
+          },
+          strong: {
+            color: theme("colors.white"),
+          },
+          "figure figcaption": {
+            color: theme("colors.gray.500"),
+          },
+          a: {
+            color: theme("colors.white"),
+          },
+          th: {
+            color: theme("colors.white"),
+          },
+          "h1, h2, h3, h4": {
+            color: theme("colors.white"),
+          },
+          code: {
+            color: theme("colors.gray.300"),
+          },
+          "code:before": {
+            color: theme("colors.gray.300"),
+          },
+          "code:after": {
+            color: theme("colors.gray.300"),
+          },
+          "ol > li:before": {
+            color: theme("colors.gray.400"),
+          },
+          "ul > li:before": {
+            backgroundColor: theme("colors.gray.600"),
+          },
+        },
+      },
+    }),
     extend: {
       width: {
         xs: "20rem",
@@ -213,18 +347,49 @@ module.exports = {
     },
   },
   variants: {
-    backgroundColor: ["hover", "focus", "selected"],
-    borderColor: ["hover", "focus", "selected"],
-    textColor: ["hover", "focus", "selected", "important"],
+    backgroundColor: [
+      "hover",
+      "focus",
+      "selected",
+      "dark",
+      "dark:hover",
+      "dark:focus",
+      "dark:selected",
+      "dark:typography",
+    ],
+    borderColor: [
+      "hover",
+      "focus",
+      "selected",
+      "dark",
+      "dark:hover",
+      "dark:focus",
+      "dark:selected",
+    ],
+    textColor: [
+      "hover",
+      "focus",
+      "selected",
+      "dark",
+      "dark:hover",
+      "dark:focus",
+      "dark:selected",
+      "important",
+      "dark:typography",
+    ],
+    textOpacity: ["dark"],
+    backgroundOpacity: ["dark", "dark:active", "dark:hover"],
     boxShadow: ["selected", "focus", "hover"],
     padding: ["responsive", "important"],
     margin: ["responsive", "important"],
     cursor: ["hover", "focus", "disabled"],
     opacity: ["hover", "focus", "disabled"],
     textDecoration: ["important"],
-    typography: [],
+    placeholderColor: ["focus", "dark:focus"],
+    typography: ["dark:typography"],
   },
   plugins: [
+    darkMode(),
     function ({ addVariant }) {
       addVariant("important", ({ container }) => {
         container.walkRules((rule) => {

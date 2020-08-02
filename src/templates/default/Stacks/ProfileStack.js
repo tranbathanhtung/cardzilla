@@ -24,10 +24,9 @@ import {
 } from "components";
 import { News } from "icons";
 import * as S from "data/template";
+import { useTheme } from "context/ThemeContext";
 
 import { useStackDispatcher } from "../context/Stack";
-
-const color = "pink";
 
 const getDataFromSocial = (social) => {
   switch (social.type) {
@@ -59,6 +58,7 @@ const getDataFromSocial = (social) => {
 const ProfileStack = memo(() => {
   const dispatch = useStackDispatcher();
   const profile = useRecoilValue(S.profile);
+  const { color } = useTheme();
   
   const handleSetStack = useCallback(
     (type) => {
@@ -80,8 +80,8 @@ const ProfileStack = memo(() => {
           </Badge>
           <Avatar
             size="2xl"
-            name="Trần Bá Thanh Tùng"
-            src="https://images.unsplash.com/photo-1568035105640-89538ccccd24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
+            name={profile.name}
+            src={profile.avatarUrl}
             className={`object-cover object-center absolute left-1/2 bottom-0 transform -translate-y-16 -translate-x-1/2 border-8 border-solid border-gray-300`}
           />
           <h3 className="absolute bottom-0 left-1/2 whitespace-no-wrap transform -translate-x-1/2 -translate-y-4 text-center">
@@ -99,28 +99,28 @@ const ProfileStack = memo(() => {
               he/him. Building{" "}
               <Link
                 href="#"
-                className={`font-semibold !text-${color}-500 hover:text-${color}-600`}
+                className={`font-semibold !text-${color}-500`}
               >
                 @tailzilla
               </Link>{" "}
               and{" "}
               <Link
                 href="#"
-                className={`font-semibold !text-${color}-500 hover:text-${color}-600`}
+                className={`font-semibold !text-${color}-500`}
               >
                 @cardzilla
               </Link>
               . Past: dev{" "}
               <Link
                 href="#"
-                className={`font-semibold !text-${color}-500 hover:text-${color}-600`}
+                className={`font-semibold !text-${color}-500`}
               >
                 @logivan
               </Link>
               ,{" "}
               <Link
                 href="#"
-                className={`font-semibold !text-${color}-500 hover:text-${color}-600`}
+                className={`font-semibold !text-${color}-500`}
               >
                 @solid.engineer
               </Link>
@@ -137,7 +137,7 @@ const ProfileStack = memo(() => {
                     size="md"
                     onClick={() => {}}
                     variantColor={color}
-                    variant="solid"
+                    variant="outline"
                     isRound
                     aria-label=""
                   >
@@ -183,7 +183,7 @@ const ProfileStack = memo(() => {
               onClick={() => handleSetStack("dev")}
             >
               <div className="flex items-center">
-                <News size={24} className="mr-2 text-gray-700" />
+                <News size={24} className="mr-2" />
                 <span>Articles</span>
               </div>
               <ChevronRight size={24} />

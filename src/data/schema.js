@@ -7,7 +7,7 @@ export default {
     profile: {
       badge: "Pro",
       avatarUrl:
-        "https://images.unsplash.com/photo-1568035105640-89538ccccd24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80",
+        "https://media2.giphy.com/media/13PMpiayBvKFck/giphy.gif?cid=ecf05e47ijo4v4n7odhz15t5vhbrqy0glmttfktimuoloy96&rid=giphy.gif",
       name: "Trần Bá Thanh Tùng",
       address: "Hà Nội, Việt Nam",
       bio:

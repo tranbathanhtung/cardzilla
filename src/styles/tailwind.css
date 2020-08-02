@@ -6,6 +6,43 @@
 
 @tailwind screens;
 
+.mode-dark {
+  @apply bg-gray-800 text-whiteAlpha-900 border-whiteAlpha-300;
+}
+
+.mode-dark ::placeholder {
+  @apply text-whiteAlpha-900;
+}
+
+.mode-dark :-ms-input-placeholder {
+  @apply text-whiteAlpha-900;
+}
+
+.mode-dark ::-ms-input-placeholder {
+  @apply text-whiteAlpha-900;
+}
+
+.mode-light {
+  @apply text-gray-800 border-gray-200;
+}
+
+.mode-light ::placeholder {
+  @apply text-gray-900;
+}
+
+.bg-inherit {
+  background-color: inherit;
+}
+
+.border-inherit {
+  border-color: inherit;
+}
+
+.text-inherit {
+  color: inherit;
+}
+
+
 @keyframes spin-animation {
   0% {
     transform: rotate(0deg);

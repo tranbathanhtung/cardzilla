@@ -18,12 +18,20 @@ function App() {
   }, []);
 
   return (
-    <div className="flex bg-gray-50 relative w-screen h-screen items-center justify-center">
-      <div className="space-x-4 absolute top-4 right-4">
+    <div className="flex relative w-screen h-screen">
+      {/* <div className="space-x-4 absolute top-4 right-4">
         <Download />
         <SettingDrawer />
+      </div> */}
+      <div className="flex">
+
       </div>
-      {TemplateChild}
+      <div className="flex flex-1 bg-gray-50 dark:bg-gray-800 items-center justify-center">
+        {TemplateChild}
+      </div>
+      <div className="flex bg-white dark:bg-gray-900 border-l border-solid border-gray-100 dark:border-gray-800 w-md overflow-y-auto overflow-x-hidden">
+        <SettingDrawer />
+      </div>
     </div>
   );
 }
