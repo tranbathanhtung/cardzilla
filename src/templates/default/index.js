@@ -1,19 +1,17 @@
 import * as React from "react";
-import { Box } from "@chakra-ui/core";
 
 import { StackController } from "./context/Stack";
 import { ProfileStack, DetailStackContainer } from "./Stacks";
-// import template from "./raw";
 
-const DefaultTemplate = () => {
+const Template = () => {
   return (
-    <Box w="md" h="750px" bg="white" rounded="md" shadow="lg" position="relative" overflow="hidden">
+    <div className="w-md bg-white rounded-md shadow-lg relative overflow-hidden prose" style={{ height: 750 }}>
       <StackController>
         <ProfileStack />
         <DetailStackContainer />
       </StackController>
-    </Box>
+    </div>
   );
 };
 
-export default DefaultTemplate;
+export default Template;

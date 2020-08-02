@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import { RecoilRoot } from "recoil";
 
-// import "./styles/index.css";
+import "./styles/index.css";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -11,10 +10,7 @@ import * as serviceWorker from "./serviceWorker";
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ThemeProvider>
-        <CSSReset />
-        <App />
-      </ThemeProvider>
+      <App />
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")

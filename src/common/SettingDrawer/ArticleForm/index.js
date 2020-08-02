@@ -16,30 +16,37 @@ import { fetchDevArticles } from "api/dev";
 
 import { ArticleFields } from "./ArticleFields";
 
-const normalizeUser = (user) => {
-  return {
-    username: user.username,
-    htmlUrl: `https://dev.to/${user.username}`,
-    articles: user.articles?.map((article) => ({
-      title: article.title,
-      description: article.description,
-      htmlUrl: article.url,
-      comment: article.comments_count,
-      reaction: article.positive_reactions_count,
-    })),
-  };
+const normalizeArticles = (user) => {
+  // return {
+  //   username: user.username,
+  //   htmlUrl: `https://dev.to/${user.username}`,
+  //   articles: user.articles?.map((article) => ({
+  //     title: article.title,
+  //     description: article.description,
+  //     htmlUrl: article.url,
+  //     comment: article.comments_count,
+  //     reaction: article.positive_reactions_count,
+  //   })),
+  // };
+  return user.articles?.map((article) => ({
+    title: article.title,
+    description: article.description,
+    htmlUrl: article.url,
+    comment: article.comments_count,
+    reaction: article.positive_reactions_count,
+  }));
 };
 
-export const DevForm = memo(({ onClose }) => {
-  const [dev, setDev] = useRecoilState(S.dev);
+export const ArticleForm = memo(({ onClose }) => {
+  const [articles, setArticles] = useRecoilState(S.articles);
   const { register, handleSubmit, control, getValues, reset } = useForm({
-    defaultValues: dev,
+    defaultValues: { articles },
   });
 
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (data) => {
-    setDev(data);
+    setArticles(data.articles);
     onClose();
   };
 
@@ -47,14 +54,13 @@ export const DevForm = memo(({ onClose }) => {
     try {
       setLoading(true);
       const username = getValues("username");
-      const articles = await fetchDevArticles(username);
+      const newArticles = await fetchDevArticles(username);
       setLoading(false);
-      const devConfig = normalizeUser({
+      const articlesConfig = normalizeArticles({
         username,
-        articles,
+        articles: newArticles,
       });
-      console.log({ devConfig });
-      reset(devConfig);
+      reset({ articles: articlesConfig });
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -88,14 +94,14 @@ export const DevForm = memo(({ onClose }) => {
         </InputGroup>
       </FormControl>
 
-      <Input
+      {/* <Input
         type="hidden"
         variant="filled"
         ref={register()}
         id="htmlUrl"
         name="htmlUrl"
         placeholder=""
-      />
+      /> */}
 
       <ArticleFields control={control} register={register} />
 

@@ -71,23 +71,15 @@ export default {
       ],
     },
     // Dev Stack
-    dev: {
-      username: "tranbathanhtung",
-      htmlUrl: "",
-      // followers: 59,
-      // following: 49,
-      // reactions: 480,
-      // followUrl: "",
-      articles: [
-        {
-          title: "How I learn code on internet and get my first job?",
-          htmlUrl: "",
-          description: "Published: Aug 19 '18",
-          reaction: 508,
-          comment: 508,
-        },
-      ],
-    },
+    articles: [
+      {
+        title: "How I learn code on internet and get my first job?",
+        htmlUrl: "",
+        description: "Published: Aug 19 '18",
+        reaction: 508,
+        comment: 508,
+      },
+    ],
     // Contact Stack
     contact: {
       email: "tranbathanhtung222@gmail.com",

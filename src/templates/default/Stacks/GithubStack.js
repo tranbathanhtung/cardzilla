@@ -1,9 +1,10 @@
 import React from "react";
 import { memo } from "react";
 import { useRecoilValue } from "recoil";
+import { ChevronRight, ChevronLeft } from "react-feather";
 
 import { Link, IconButton, ButtonGroup, Button } from "components";
-import { ChevronRight, ChevronLeft, Fork, Star, People, Heart } from "icons";
+import { Fork, Star, People, Heart } from "icons";
 import * as S from "data/template";
 
 import { useStackDispatcher } from "../context/Stack";

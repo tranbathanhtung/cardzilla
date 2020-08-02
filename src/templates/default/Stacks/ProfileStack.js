@@ -1,6 +1,16 @@
 import * as React from "react";
 import { memo, useCallback } from "react";
 import { useRecoilValue } from "recoil";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Twitter,
+  MapPin,
+  ChevronRight,
+  Mail,
+  GitHub,
+} from "react-feather";
 
 import {
   Avatar,
@@ -11,20 +21,8 @@ import {
   Tag,
   TagLabel,
   Link,
-  Flex,
-  Col,
-} from "@chakra-ui/core";
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Twitter,
-  MapPin,
-  Devto,
-  Github,
-  ChevronRight,
-  Mail,
-} from "icons";
+} from "components";
+import { News } from "icons";
 import * as S from "data/template";
 
 import { useStackDispatcher } from "../context/Stack";
@@ -173,7 +171,7 @@ const ProfileStack = memo(() => {
               onClick={() => handleSetStack("github")}
             >
               <div className="flex items-center">
-                <Github size={24} className="mr-2" />
+                <GitHub size={24} className="mr-2" />
                 <span>Github</span>
               </div>
               <ChevronRight size={24} />
@@ -185,8 +183,8 @@ const ProfileStack = memo(() => {
               onClick={() => handleSetStack("dev")}
             >
               <div className="flex items-center">
-                <Devto size={24} className="mr-2 text-gray-700" />
-                <span>Dev</span>
+                <News size={24} className="mr-2 text-gray-700" />
+                <span>Articles</span>
               </div>
               <ChevronRight size={24} />
             </Button>

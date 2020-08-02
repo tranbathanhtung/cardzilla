@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useFieldArray } from "react-hook-form";
+import { Trash2 } from "react-feather";
 
 import { Input, FormControl, FormLabel, IconButton } from "components";
-import { Trash2 } from "icons";
 
 export const ArticleFields = ({ control, register }) => {
   const { fields, remove } = useFieldArray({

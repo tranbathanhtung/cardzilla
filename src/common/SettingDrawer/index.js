@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useRef, memo } from "react";
+import { Settings, Check } from "react-feather";
 
 import {
   IconButton,
@@ -17,14 +18,13 @@ import {
   TabPanel,
   Button,
   RadioButtonGroup,
-} from "@chakra-ui/core";
+} from "components";
 import { useDisclosure } from "hooks/useDisclosure";
-import { Settings, Check } from "icons";
 
 import { ProfileForm } from "./ProfileForm";
 import { ContactForm } from "./ContactForm";
 import { GithubForm } from "./GithubForm";
-import { DevForm } from "./DevForm";
+import { ArticleForm } from "./ArticleForm";
 
 const tabClass =
   "inline-flex appearance-none items-center justify-center transition-all duration-200 select-none relative whitespace-no-wrap align-middle leading-tight outline-none focus:outline-none h-10 min-w-10 text-base px-4 focus:shadow-outline selected:bg-gray-100 active:bg-gray-300 dark:selected:bg-whiteAlpha-200 dark:active:bg-whiteAlpha-400 outline-none focus:outline-none cursor-pointer focus:z-10 disabled:opacity-40 disabled:cursor-not-allowed text-base py-4 flex-1 font-semibold rounded-md";
@@ -181,7 +181,7 @@ export const SettingDrawer = (props) => {
                     <GithubForm onClose={onClose} />
                   </TabPanel>
                   <TabPanel>
-                    <DevForm onClose={onClose} />
+                    <ArticleForm onClose={onClose} />
                   </TabPanel>
                   <TabPanel>
                     <ContactForm onClose={onClose} />

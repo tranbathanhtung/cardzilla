@@ -1,8 +1,7 @@
 import * as React from "react";
 import { forwardRef } from "react";
 import classNames from "classnames";
-
-import { AlertCircle } from "icons";
+import { AlertCircle } from "react-feather";
 
 import { useFormControl } from "../FormControl";
 

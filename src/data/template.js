@@ -46,19 +46,19 @@ export const github = selector({
   },
 });
 
-export const dev = selector({
-  key: "dev",
+export const articles = selector({
+  key: "articles",
   get: ({ get }) => {
     const template = get(templateState);
-    return template.config.dev;
+    return template.config.articles;
   },
-  set: ({ get, set }, dev) => {
+  set: ({ get, set }, articles) => {
     const template = get(templateState);
     const newTemplate = {
       ...template,
       config: {
         ...template.config,
-        dev
+        articles
       },
     };
 

@@ -1,14 +1,14 @@
 import React from "react";
 import { memo } from "react";
 import { useRecoilValue } from "recoil";
+import { ChevronRight, ChevronLeft, MessageCircle, Heart } from "react-feather";
 
-import { Link, IconButton, ButtonGroup, Button } from "components";
-import { ChevronRight, ChevronLeft, MessageCircle, Heart } from "icons";
+import { Link, IconButton } from "components";
 import * as S from "data/template";
 
 import { useStackDispatcher } from "../context/Stack";
 
-const DevArticle = memo(({ article }) => (
+const Article = memo(({ article }) => (
   <Link
     className="focus:shadow-none !no-underline"
     href={article.htmlUrl}
@@ -46,9 +46,9 @@ const DevArticle = memo(({ article }) => (
   </Link>
 ));
 
-const DevStack = memo(() => {
+const ArticleStack = memo(() => {
   const dispatch = useStackDispatcher();
-  const dev = useRecoilValue(S.dev);
+  const articles = useRecoilValue(S.articles);
   const profile = useRecoilValue(S.profile);
 
   return (
@@ -75,7 +75,7 @@ const DevStack = memo(() => {
       </div>
 
       <div className="px-8 overflow-y-auto hide-scrollbar">
-        <div className="my-3">
+        {/* <div className="my-3">
           <Link
             href={dev.htmlUrl}
             target="_blank"
@@ -85,12 +85,12 @@ const DevStack = memo(() => {
               Follow
             </Button>
           </Link>
-        </div>
+        </div> */}
 
         <h4 className="mb-3 uppercase">Articles</h4>
         <div className="my-3">
-          {dev.articles?.map((article, idx) => (
-            <DevArticle key={idx} article={article} />
+          {articles?.map((article, idx) => (
+            <Article key={idx} article={article} />
           ))}
         </div>
       </div>
@@ -98,4 +98,4 @@ const DevStack = memo(() => {
   );
 });
 
-export default DevStack;
+export default ArticleStack;

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useFieldArray } from "react-hook-form";
+import { Trash2 } from "react-feather";
 
 import {
   Input,
@@ -9,7 +10,6 @@ import {
   Select,
   IconButton,
 } from "components";
-import { Trash2 } from "icons";
 
 const colors = [
   "gray",

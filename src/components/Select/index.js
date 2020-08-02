@@ -1,8 +1,7 @@
 import * as React from "react";
 import { forwardRef } from "react";
 import classNames from "classnames";
-
-import { ChevronDown } from "icons";
+import { ChevronDown } from "react-feather";
 
 import Input from "../Input";
 

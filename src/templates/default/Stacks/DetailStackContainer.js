@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { useStackState } from "../context/Stack";
 
 import GithubStack from "./GithubStack";
-import DevStack from "./DevStack";
+import ArticleStack from "./ArticleStack";
 import ContactStack from "./ContactStack";
 
 const DetailStackContainer = () => {
@@ -15,7 +15,7 @@ const DetailStackContainer = () => {
       case "github":
         return <GithubStack />;
       case "dev":
-        return <DevStack />;
+        return <ArticleStack />;
       case "contact":
         return <ContactStack />
       default:

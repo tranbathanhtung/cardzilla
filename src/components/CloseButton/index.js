@@ -1,7 +1,6 @@
 import * as React from "react";
 import { forwardRef } from "react";
-
-import { X } from "icons";
+import { X } from "react-feather";
 
 import classNames from "classnames";
 

@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import { Flex, Stack } from "@chakra-ui/core";
 
 import { DefaultTemplate } from "templates";
 // import template from "fixtures/default";
@@ -19,13 +18,13 @@ function App() {
   }, []);
 
   return (
-    <Flex bg="gray.50" position="relative" w="100vw" h="100vh" align="center" justify="center">
-      <Stack position="absolute" top="2rem" right="2rem" spacing={4} isInline className="space-x-4">
+    <div className="flex bg-gray-50 relative w-screen h-screen items-center justify-center">
+      <div className="space-x-4 absolute top-4 right-4">
         <Download />
         <SettingDrawer />
-      </Stack>
+      </div>
       {TemplateChild}
-    </Flex>
+    </div>
   );
 }
 
