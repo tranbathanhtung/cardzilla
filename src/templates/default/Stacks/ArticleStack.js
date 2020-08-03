@@ -14,7 +14,7 @@ const Article = memo(({ article }) => (
     href={article.htmlUrl}
     target="_blank"
   >
-    <div className="flex w-full mb-3 px-2 bg-gray-50 dark:bg-gray-800 rounded-md shadow hover:shadow-lg cursor-pointer transition-shadow duration-200">
+    <div className="flex w-full mb-3 px-2 bg-gray-50 dark:bg-gray-600 rounded-md shadow hover:shadow-lg cursor-pointer transition-shadow duration-200">
       <div className="flex p-3 w-full">
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between relative">

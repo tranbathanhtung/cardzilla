@@ -13,6 +13,7 @@ import {
 } from "components";
 import * as S from "data/template";
 import { fetchGithubUser } from "api/github";
+import { useTheme } from "context/ThemeContext";
 
 import { RepoFields } from "./RepoFields";
 
@@ -37,6 +38,7 @@ const normalizeUser = (user) => {
 };
 
 export const GithubForm = memo(({ onClose }) => {
+  const { color } = useTheme();
   const [github, setGithub] = useRecoilState(S.github);
   const { register, handleSubmit, control, getValues, reset } = useForm({
     defaultValues: github,
@@ -79,7 +81,7 @@ export const GithubForm = memo(({ onClose }) => {
           />
           <InputRightElement className="w-16 !px-0">
             <Button
-              variantColor="teal"
+              variantColor={color}
               size="sm"
               onClick={handleLoadGithubUsername}
               isLoading={loading}

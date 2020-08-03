@@ -10,6 +10,10 @@ import {
   ChevronRight,
   Mail,
   GitHub,
+  Codepen,
+  Codesandbox,
+  Youtube,
+  Twitch,
 } from "react-feather";
 
 import {
@@ -50,6 +54,26 @@ const getDataFromSocial = (social) => {
         icon: Linkedin,
         color: "blue",
       };
+    case "codepen":
+      return {
+        icon: Codepen,
+        color: "gray",
+      };
+    case "codesandbox":
+      return {
+        icon: Codesandbox,
+        color: "gray",
+      };
+    case "youtube":
+      return {
+        icon: Youtube,
+        color: "red",
+      };
+    case "twitch":
+      return {
+        icon: Twitch,
+        color: "purple",
+      };
     default:
       return {};
   }
@@ -59,7 +83,7 @@ const ProfileStack = memo(() => {
   const dispatch = useStackDispatcher();
   const profile = useRecoilValue(S.profile);
   const { color } = useTheme();
-  
+
   const handleSetStack = useCallback(
     (type) => {
       dispatch({ type: "set.stack", payload: { stack: "detail", type } });
@@ -97,31 +121,19 @@ const ProfileStack = memo(() => {
           <div className="my-2">
             <p className="text-center">
               he/him. Building{" "}
-              <Link
-                href="#"
-                className={`font-semibold !text-${color}-500`}
-              >
+              <Link href="#" className={`font-semibold !text-${color}-500`}>
                 @tailzilla
               </Link>{" "}
               and{" "}
-              <Link
-                href="#"
-                className={`font-semibold !text-${color}-500`}
-              >
+              <Link href="#" className={`font-semibold !text-${color}-500`}>
                 @cardzilla
               </Link>
               . Past: dev{" "}
-              <Link
-                href="#"
-                className={`font-semibold !text-${color}-500`}
-              >
+              <Link href="#" className={`font-semibold !text-${color}-500`}>
                 @logivan
               </Link>
               ,{" "}
-              <Link
-                href="#"
-                className={`font-semibold !text-${color}-500`}
-              >
+              <Link href="#" className={`font-semibold !text-${color}-500`}>
                 @solid.engineer
               </Link>
             </p>
@@ -154,10 +166,10 @@ const ProfileStack = memo(() => {
           <div className="flex flex-wrap list-none my-5">
             {profile.skills.map((skill, idx) => (
               <div className="mr-2 mb-2" key={idx}>
-              <Tag variantColor={skill.color || "gray"}>
-                <TagLabel>{skill.name}</TagLabel>
-              </Tag>
-            </div>
+                <Tag variantColor={skill.color || "gray"}>
+                  <TagLabel>{skill.name}</TagLabel>
+                </Tag>
+              </div>
             ))}
           </div>
         </div>

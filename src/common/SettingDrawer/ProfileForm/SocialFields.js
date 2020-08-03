@@ -11,7 +11,7 @@ import {
   Select,
   IconButton,
 } from "components";
-import { useTheme } from "context/ThemeContext";
+// import { useTheme } from "context/ThemeContext";
 
 const socialTypes = [
   {
@@ -30,10 +30,26 @@ const socialTypes = [
     type: "linkedin",
     name: "Linkedin",
   },
+  {
+    type: "youtube",
+    name: "Youtube",
+  },
+  {
+    type: "twitch",
+    name: "Twitch",
+  },
+  {
+    type: "codepen",
+    name: "Codepen",
+  },
+  {
+    type: "codesandbox",
+    name: "Codesandbox",
+  },
 ];
 
 export const SocialFields = memo(({ control, register }) => {
-  const { color } = useTheme();
+  // const { color } = useTheme();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "socials",
@@ -91,9 +107,11 @@ export const SocialFields = memo(({ control, register }) => {
           </li>
         ))}
       </ul>
-      <Button onClick={append} className="w-full" variantColor={color}>
-        Add Socials
-      </Button>
+      {fields.length < 5 && (
+        <Button onClick={append} className="w-full" variantColor="gray">
+          Add Social
+        </Button>
+      )}
     </div>
   );
 });

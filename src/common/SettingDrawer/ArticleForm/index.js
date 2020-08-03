@@ -13,6 +13,7 @@ import {
 } from "components";
 import * as S from "data/template";
 import { fetchDevArticles } from "api/dev";
+import { useTheme } from "context/ThemeContext";
 
 import { ArticleFields } from "./ArticleFields";
 
@@ -38,6 +39,7 @@ const normalizeArticles = (user) => {
 };
 
 export const ArticleForm = memo(({ onClose }) => {
+  const { color } = useTheme();
   const [articles, setArticles] = useRecoilState(S.articles);
   const { register, handleSubmit, control, getValues, reset } = useForm({
     defaultValues: { articles },
@@ -82,7 +84,7 @@ export const ArticleForm = memo(({ onClose }) => {
           />
           <InputRightElement className="w-16 !px-0">
             <Button
-              variantColor="teal"
+              variantColor={color}
               size="sm"
               onClick={handleLoadDevUsername}
               isLoading={loading}
