@@ -11,7 +11,6 @@ import {
   Select,
   IconButton,
 } from "components";
-// import { useTheme } from "context/ThemeContext";
 
 const socialTypes = [
   {
@@ -49,7 +48,6 @@ const socialTypes = [
 ];
 
 export const SocialFields = memo(({ control, register }) => {
-  // const { color } = useTheme();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "socials",
@@ -67,7 +65,7 @@ export const SocialFields = memo(({ control, register }) => {
             <FormControl className="w-1/2">
               <FormLabel htmlFor={`socials[${index}].type`}>Type</FormLabel>
               <Select
-                variant="filled"
+                variant="outline"
                 ref={register()}
                 id={`socials[${index}].type`}
                 name={`socials[${index}].type`}
@@ -86,7 +84,7 @@ export const SocialFields = memo(({ control, register }) => {
             <FormControl className="w-1/2">
               <FormLabel htmlFor={`socials[${index}].link`}>Link</FormLabel>
               <Input
-                variant="filled"
+                variant="outline"
                 ref={register()}
                 id={`socials[${index}].link`}
                 name={`socials[${index}].link`}
@@ -108,7 +106,7 @@ export const SocialFields = memo(({ control, register }) => {
         ))}
       </ul>
       {fields.length < 5 && (
-        <Button onClick={append} className="w-full" variantColor="gray">
+        <Button onClick={append} className="w-full" variantColor="gray" className="bg-gray-300">
           Add Social
         </Button>
       )}

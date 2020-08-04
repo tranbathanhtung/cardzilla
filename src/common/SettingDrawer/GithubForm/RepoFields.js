@@ -23,7 +23,7 @@ export const RepoFields = memo(({ control, register }) => {
             <FormControl isDisabled className="w-1/2">
               <FormLabel htmlFor={`repos[${index}].name`}>Name</FormLabel>
               <Input
-                variant="filled"
+                variant="outline"
                 ref={register()}
                 id={`repos[${index}].name`}
                 name={`repos[${index}].name`}
@@ -37,7 +37,7 @@ export const RepoFields = memo(({ control, register }) => {
                 Description
               </FormLabel>
               <Input
-                variant="filled"
+                variant="outline"
                 ref={register()}
                 id={`repos[${index}].description`}
                 name={`repos[${index}].description`}
@@ -48,7 +48,7 @@ export const RepoFields = memo(({ control, register }) => {
 
             <Input
               type="hidden"
-              variant="filled"
+              variant="outline"
               ref={register()}
               id={`repos[${index}].htmlUrl`}
               name={`repos[${index}].htmlUrl`}
@@ -58,7 +58,7 @@ export const RepoFields = memo(({ control, register }) => {
 
             <Input
               type="hidden"
-              variant="filled"
+              variant="outline"
               ref={register()}
               id={`repos[${index}].language`}
               name={`repos[${index}].language`}
@@ -68,7 +68,7 @@ export const RepoFields = memo(({ control, register }) => {
 
             <Input
               type="hidden"
-              variant="filled"
+              variant="outline"
               ref={register()}
               id={`repos[${index}].languageColor`}
               name={`repos[${index}].languageColor`}
@@ -78,7 +78,7 @@ export const RepoFields = memo(({ control, register }) => {
 
             <Input
               type="hidden"
-              variant="filled"
+              variant="outline"
               ref={register()}
               id={`repos[${index}].star`}
               name={`repos[${index}].star`}
@@ -88,7 +88,7 @@ export const RepoFields = memo(({ control, register }) => {
 
             <Input
               type="hidden"
-              variant="filled"
+              variant="outline"
               ref={register()}
               id={`repos[${index}].fork`}
               name={`repos[${index}].fork`}

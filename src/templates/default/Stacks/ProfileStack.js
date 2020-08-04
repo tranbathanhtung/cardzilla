@@ -27,8 +27,7 @@ import {
   Link,
 } from "components";
 import { News } from "icons";
-import * as S from "data/template";
-import { useTheme } from "context/ThemeContext";
+import * as S from "data";
 
 import { useStackDispatcher } from "../context/Stack";
 
@@ -82,7 +81,7 @@ const getDataFromSocial = (social) => {
 const ProfileStack = memo(() => {
   const dispatch = useStackDispatcher();
   const profile = useRecoilValue(S.profile);
-  const { color } = useTheme();
+  const color = useRecoilValue(S.color);
 
   const handleSetStack = useCallback(
     (type) => {
@@ -93,7 +92,7 @@ const ProfileStack = memo(() => {
 
   return (
     <div className="flex flex-col overflow-hidden w-full h-full absolute top-0 bottom-0">
-      <div className="relative overflow-y-auto overflow-x-hidden flex flex-col z-1 h-full">
+      <div className="relative overflow-y-auto overflow-x-hidden flex flex-col z-1 h-full hide-scrollbar">
         <div className="relative flex w-full flex-shrink-0 h-64">
           <Badge
             className="absolute top-4 left-4"
@@ -105,7 +104,7 @@ const ProfileStack = memo(() => {
           <Avatar
             size="2xl"
             name={profile.name}
-            src={profile.avatarUrl}
+            src={profile.avatarURL}
             className={`object-cover object-center absolute left-1/2 bottom-0 transform -translate-y-16 -translate-x-1/2 border-8 border-solid border-gray-300`}
           />
           <h3 className="absolute bottom-0 left-1/2 whitespace-no-wrap transform -translate-x-1/2 -translate-y-4 text-center">
@@ -141,7 +140,7 @@ const ProfileStack = memo(() => {
 
           <div className="my-2">
             <ButtonGroup spacing="6" className="flex justify-center">
-              {profile.socials.map((social) => {
+              {profile.socials?.map((social) => {
                 const { color, icon: Icon } = getDataFromSocial(social);
                 return (
                   <IconButton
@@ -149,7 +148,7 @@ const ProfileStack = memo(() => {
                     size="md"
                     onClick={() => {}}
                     variantColor={color}
-                    variant="outline"
+                    variant="solid"
                     isRound
                     aria-label=""
                   >
@@ -164,7 +163,7 @@ const ProfileStack = memo(() => {
         <div className="flex flex-col px-8 py-2">
           <h6 className="uppercase">Skills</h6>
           <div className="flex flex-wrap list-none my-5">
-            {profile.skills.map((skill, idx) => (
+            {profile.skills?.map((skill, idx) => (
               <div className="mr-2 mb-2" key={idx}>
                 <Tag variantColor={skill.color || "gray"}>
                   <TagLabel>{skill.name}</TagLabel>

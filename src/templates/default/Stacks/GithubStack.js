@@ -5,7 +5,7 @@ import { ChevronRight, ChevronLeft } from "react-feather";
 
 import { Link, IconButton, ButtonGroup, Button } from "components";
 import { Fork, Star, People, Heart } from "icons";
-import * as S from "data/template";
+import * as S from "data/schema";
 
 import { useStackDispatcher } from "../context/Stack";
 

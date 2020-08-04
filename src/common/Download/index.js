@@ -9,7 +9,7 @@ import rawTemplate from "templates/default/raw";
 import rawApp from "data/raw";
 import saveJsZip from "saveJsZip";
 
-export const Download = memo(({ className }) => {
+export const Download = memo(() => {
   const handleDownload = async () => {
     const raw = [...rawApp, ...rawTemplate];
     const { file } = await saveJsZip.create(raw);
@@ -24,7 +24,7 @@ export const Download = memo(({ className }) => {
       variantColor="gray"
       variant="solid"
       aria-label="Settings"
-      className={className}
+      className="bg-gray-300"
       onClick={handleDownload}
     >
       <DownloadIcon size={18} />

@@ -5,15 +5,14 @@ import { RecoilRoot } from "recoil";
 import "./styles/index.css";
 import "./index.css";
 import App from "./App";
-import { ThemeProvider } from "context/ThemeContext";
+import { Auth } from "./Auth";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <App />
+      <Auth />
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,51 +1,54 @@
 import React, { useMemo } from "react";
+import { useRecoilValue } from "recoil";
 
 import { DefaultTemplate } from "templates";
-// import template from "fixtures/default";
-import { SettingDrawer } from "./common/SettingDrawer";
-import { Download } from "./common/Download";
-import { Deploy } from "./common/Deploy";
-import { GithubLogin } from "./common/GithubLogin";
-
-const template = { name: "default" };
+import { Header } from "common/Header";
+import { SettingDrawer } from "common/SettingDrawer";
+import { Deploy } from "common/Deploy";
+import * as S from "data";
 
 function App() {
-  const TemplateChild = useMemo(() => {
-    switch (template.name) {
-      case "default":
-        return <DefaultTemplate />;
+  const schema = useRecoilValue(S.schemaState);
+  const workspace = useRecoilValue(S.workspace);
+
+  // TODO: For multiple template
+  // const TemplateChild = useMemo(() => {
+  //   switch (template?.name) {
+  //     case "default":
+  //       return <DefaultTemplate />;
+  //     default:
+  //       return null;
+  //   }
+  // }, [template]);
+
+  const Workspace = useMemo(() => {
+    if (!schema) return null;
+    switch (workspace) {
+      case "template.config":
+        return <SettingDrawer />;
+      case "template.deploy":
+        return <Deploy />;
       default:
         return null;
     }
-  }, []);
+  }, [schema, workspace])
 
   return (
     <div className="flex w-screen h-screen overflow-hidden">
-      {/* <div className="space-x-4 absolute top-4 right-4">
-        <Download />
-        <SettingDrawer />
-      </div> */}
       <div className="w-full h-full flex-1">
-        <header className="h-16 bg-gray-700 dark:bg-gray-900">
-          <div className="w-full h-full flex justify-between items-center px-4 py-3">
-            <div></div>
-            <div className="flex space-x-4">
-              <Download />
-              <Deploy />
-              <GithubLogin />
-            </div>
-          </div>
-        </header>
+        <Header />
         <div
           style={{ height: "calc(100vh - 4rem)" }}
-          className="flex flex-1 bg-gray-50 dark:bg-gray-800 items-center justify-center"
+          className="flex flex-wrap p-5 bg-gray-50 dark:bg-gray-800 overflow-y-auto overflow-x-hidden"
         >
-          {TemplateChild}
+          <DefaultTemplate />
         </div>
       </div>
-      <div className="flex bg-white dark:bg-gray-900 border-l border-solid border-gray-100 dark:border-gray-800 w-md overflow-y-auto overflow-x-hidden">
-        <SettingDrawer />
-      </div>
+      {workspace && (
+        <div className="flex bg-gray-100 dark:bg-gray-900 w-md overflow-y-auto overflow-x-hidden">
+          {Workspace}
+        </div>
+      )}
     </div>
   );
 }

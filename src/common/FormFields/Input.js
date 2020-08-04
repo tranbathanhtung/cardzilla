@@ -2,20 +2,22 @@ import * as React from "react";
 
 import {
   Input as CharkaInput,
+  InputGroup,
   FormControl,
   FormLabel,
+  InputRightAddon,
 } from "components";
 
-const Input = ({ register, name, isDisabled, label, ...rest }) => {
+const Input = ({ register, name, isDisabled, label, rightAddon = "", ...rest }) => {
   return (
     <FormControl isDisabled={isDisabled}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <CharkaInput
-        ref={register()}
-        id={name}
-        name={name}
-        {...rest}
-      />
+      <InputGroup>
+        <CharkaInput ref={register()} id={name} name={name} {...rest} />
+        {rightAddon && (
+          <InputRightAddon children={rightAddon} className="bg-gray-200" />
+        )}
+      </InputGroup>
     </FormControl>
   );
 };

@@ -5,7 +5,7 @@ import { ProfileStack, DetailStackContainer } from "./Stacks";
 
 const Template = () => {
   return (
-    <div className="w-md bg-white dark:bg-gray-700 rounded-md shadow-lg relative overflow-hidden prose dark:typography:prose-dark" style={{ height: 750 }}>
+    <div className="max-w-md w-md bg-white dark:bg-gray-700 rounded-md shadow-lg relative overflow-hidden prose dark:typography:prose-dark m-auto" style={{ height: 750 }}>
       <StackController>
         <ProfileStack />
         <DetailStackContainer />

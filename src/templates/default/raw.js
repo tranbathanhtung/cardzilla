@@ -1,7 +1,7 @@
 /* eslint-disable */
 import templateStr from "!raw-loader!./index";
-import schemaStr from "!raw-loader!data/schema";
-import recoilStr from "!raw-loader!data/template";
+// import schemaStr from "!raw-loader!data/schema";
+// import recoilStr from "!raw-loader!data/template";
 
 import ContactStackStr from "!raw-loader!./Stacks/ContactStack";
 import DetailStackContainerStr from "!raw-loader!./Stacks/DetailStackContainer";
@@ -21,12 +21,12 @@ export default [
   {
     title: "/src/data/schema.js",
     type: "file",
-    source: schemaStr,
+    // source: schemaStr,
   },
   {
     title: "/src/data/template.js",
     type: "file",
-    source: recoilStr,
+    // source: recoilStr,
   },
 
   // Stacks folder

@@ -14,6 +14,9 @@ export { default as Badge } from "./Badge";
 export { default as Tag } from "./Tag";
 export * from "./Tag";
 
+export { default as Popper } from "./Popper";
+export * from "./Popover";
+
 export { default as Textarea } from "./Textarea";
 export { default as FormLabel } from "./FormLabel";
 export { default as FormControl } from "./FormControl";
@@ -23,6 +26,8 @@ export { default as FormErrorMessage } from "./FormErrorMessage";
 export { default as FormHelperText } from "./FormHelperText";
 export { default as InputGroup } from "./InputGroup";
 export * from "./InputElement";
+export { default as InputAddon } from "./InputAddon";
+export * from "./InputAddon";
 
 export { default as Spinner } from "./Spinner";
 export { default as RadioButtonGroup } from "./RadioButtonGroup";

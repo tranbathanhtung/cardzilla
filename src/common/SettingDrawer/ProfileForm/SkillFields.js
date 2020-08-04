@@ -11,7 +11,6 @@ import {
   Select,
   IconButton,
 } from "components";
-// import { useTheme } from "context/ThemeContext";
 
 const colors = [
   "gray",
@@ -27,7 +26,6 @@ const colors = [
 ];
 
 export const SkillFields = memo(({ control, register }) => {
-  // const { color } = useTheme();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "skills",
@@ -45,7 +43,7 @@ export const SkillFields = memo(({ control, register }) => {
             <FormControl className="w-1/2">
               <FormLabel htmlFor={`skills[${index}].name`}>Name</FormLabel>
               <Input
-                variant="filled"
+                variant="outline"
                 ref={register()}
                 id={`skills[${index}].name`}
                 name={`skills[${index}].name`}
@@ -57,7 +55,7 @@ export const SkillFields = memo(({ control, register }) => {
             <FormControl className="w-1/2">
               <FormLabel htmlFor={`skills[${index}].color`}>Color</FormLabel>
               <Select
-                variant="filled"
+                variant="outline"
                 ref={register()}
                 id={`skills[${index}].color`}
                 name={`skills[${index}].color`}
@@ -86,7 +84,7 @@ export const SkillFields = memo(({ control, register }) => {
         ))}
       </ul>
       {fields.length < 5 && (
-        <Button onClick={append} className="w-full" variantColor="gray">
+        <Button onClick={append} className="w-full" variantColor="gray" className="bg-gray-300">
           Add skill
         </Button>
       )}

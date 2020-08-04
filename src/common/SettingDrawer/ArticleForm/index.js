@@ -1,7 +1,7 @@
 import * as React from "react";
 import { memo, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import {
   Input,
@@ -11,9 +11,8 @@ import {
   InputGroup,
   InputRightElement,
 } from "components";
-import * as S from "data/template";
+import * as S from "data";
 import { fetchDevArticles } from "api/dev";
-import { useTheme } from "context/ThemeContext";
 
 import { ArticleFields } from "./ArticleFields";
 
@@ -39,7 +38,7 @@ const normalizeArticles = (user) => {
 };
 
 export const ArticleForm = memo(({ onClose }) => {
-  const { color } = useTheme();
+  const color = useRecoilValue(S.color);
   const [articles, setArticles] = useRecoilState(S.articles);
   const { register, handleSubmit, control, getValues, reset } = useForm({
     defaultValues: { articles },
@@ -75,7 +74,7 @@ export const ArticleForm = memo(({ onClose }) => {
         <FormLabel htmlFor="username">Username</FormLabel>
         <InputGroup size="md" className="mt-4">
           <Input
-            variant="filled"
+            variant="outline"
             ref={register()}
             id="username"
             name="username"
@@ -98,7 +97,7 @@ export const ArticleForm = memo(({ onClose }) => {
 
       {/* <Input
         type="hidden"
-        variant="filled"
+        variant="outline"
         ref={register()}
         id="htmlUrl"
         name="htmlUrl"
@@ -107,7 +106,7 @@ export const ArticleForm = memo(({ onClose }) => {
 
       <ArticleFields control={control} register={register} />
 
-      <Button className="mt-4" variantColor="gray" type="submit">
+      <Button className="mt-4" variantColor="gray" type="submit" className="bg-gray-300">
         Preview
       </Button>
     </form>

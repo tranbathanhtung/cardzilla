@@ -22,7 +22,7 @@ export const ArticleFields = ({ control, register }) => {
             <FormControl isDisabled className="w-1/2">
               <FormLabel htmlFor={`articles[${index}].name`}>Title</FormLabel>
               <Input
-                variant="filled"
+                variant="outline"
                 ref={register()}
                 id={`articles[${index}].title`}
                 name={`articles[${index}].title`}
@@ -36,7 +36,7 @@ export const ArticleFields = ({ control, register }) => {
                 Description
               </FormLabel>
               <Input
-                variant="filled"
+                variant="outline"
                 ref={register()}
                 id={`articles[${index}].description`}
                 name={`articles[${index}].description`}
@@ -47,7 +47,7 @@ export const ArticleFields = ({ control, register }) => {
 
             <Input
               type="hidden"
-              variant="filled"
+              variant="outline"
               ref={register()}
               id={`articles[${index}].htmlUrl`}
               name={`articles[${index}].htmlUrl`}
@@ -57,7 +57,7 @@ export const ArticleFields = ({ control, register }) => {
 
             <Input
               type="hidden"
-              variant="filled"
+              variant="outline"
               ref={register()}
               id={`articles[${index}].comment`}
               name={`articles[${index}].comment`}
@@ -67,7 +67,7 @@ export const ArticleFields = ({ control, register }) => {
 
             <Input
               type="hidden"
-              variant="filled"
+              variant="outline"
               ref={register()}
               id={`articles[${index}].reaction`}
               name={`articles[${index}].reaction`}

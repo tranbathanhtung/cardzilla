@@ -1,7 +1,7 @@
 import * as React from "react";
 import { memo, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import {
   Input,
@@ -11,9 +11,8 @@ import {
   InputGroup,
   InputRightElement,
 } from "components";
-import * as S from "data/template";
+import * as S from "data";
 import { fetchGithubUser } from "api/github";
-import { useTheme } from "context/ThemeContext";
 
 import { RepoFields } from "./RepoFields";
 
@@ -38,7 +37,7 @@ const normalizeUser = (user) => {
 };
 
 export const GithubForm = memo(({ onClose }) => {
-  const { color } = useTheme();
+  const color = useRecoilValue(S.color);
   const [github, setGithub] = useRecoilState(S.github);
   const { register, handleSubmit, control, getValues, reset } = useForm({
     defaultValues: github,
@@ -62,6 +61,7 @@ export const GithubForm = memo(({ onClose }) => {
       console.log({ user, githubConfig })
       reset(githubConfig);
     } catch (err) {
+      setLoading(false);
       console.log(err)
     }
   }, [getValues, reset]);
@@ -72,7 +72,7 @@ export const GithubForm = memo(({ onClose }) => {
         <FormLabel htmlFor="username">Username</FormLabel>
         <InputGroup size="md" className="mt-4">
           <Input
-            variant="filled"
+            variant="outline"
             ref={register()}
             id="username"
             name="username"
@@ -97,7 +97,7 @@ export const GithubForm = memo(({ onClose }) => {
         <FormControl isDisabled className="w-1/3">
           <FormLabel htmlFor="followers">Followers</FormLabel>
           <Input
-            variant="filled"
+            variant="outline"
             ref={register()}
             id="followers"
             name="followers"
@@ -107,7 +107,7 @@ export const GithubForm = memo(({ onClose }) => {
         <FormControl isDisabled className="w-1/3">
           <FormLabel htmlFor="following">Following</FormLabel>
           <Input
-            variant="filled"
+            variant="outline"
             ref={register()}
             id="following"
             name="following"
@@ -117,7 +117,7 @@ export const GithubForm = memo(({ onClose }) => {
         <FormControl isDisabled className="w-1/3">
           <FormLabel htmlFor="starredRepositories">Starred</FormLabel>
           <Input
-            variant="filled"
+            variant="outline"
             ref={register()}
             id="starredRepositories"
             name="starredRepositories"
@@ -128,7 +128,7 @@ export const GithubForm = memo(({ onClose }) => {
 
       <Input
         type="hidden"
-        variant="filled"
+        variant="outline"
         ref={register()}
         id="htmlUrl"
         name="htmlUrl"
@@ -137,7 +137,7 @@ export const GithubForm = memo(({ onClose }) => {
 
       <Input
         type="hidden"
-        variant="filled"
+        variant="outline"
         ref={register()}
         id="sponsorUrl"
         name="sponsorUrl"
@@ -146,7 +146,7 @@ export const GithubForm = memo(({ onClose }) => {
 
       <RepoFields control={control} register={register} />
 
-      <Button className="mt-4" variantColor="gray" type="submit">
+      <Button className="mt-4" variantColor="gray" type="submit" className="bg-gray-300">
         Preview
       </Button>
     </form>
