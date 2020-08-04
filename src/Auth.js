@@ -4,9 +4,9 @@ import { useSetRecoilState, useRecoilState } from "recoil";
 
 import { auth } from "services/firebase";
 import { getSchemaByUserId, getVercelUserByUserId } from "services/firestore";
-import * as S from "data/user";
-import { schemaState } from "data/schema";
-import defaultSchema from "data/defaultSchema";
+import * as S from "selectors/user";
+import { schemaState } from "selectors/schema";
+import defaultSchema from "fixtures/defaultSchema";
 
 const normalizeUser = (user, vercel) => ({
   id: user.uid,
@@ -57,6 +57,7 @@ export const Auth = memo(() => {
             setSchema(normalizeSchema(defaultSchema));
           }
         }
+
       } catch (e) {
         console.log(e);
       }

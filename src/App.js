@@ -5,7 +5,7 @@ import { DefaultTemplate } from "templates";
 import { Header } from "common/Header";
 import { SettingDrawer } from "common/SettingDrawer";
 import { Deploy } from "common/Deploy";
-import * as S from "data";
+import * as S from "selectors";
 
 function App() {
   const schema = useRecoilValue(S.schemaState);
@@ -31,7 +31,7 @@ function App() {
       default:
         return null;
     }
-  }, [schema, workspace])
+  }, [schema, workspace]);
 
   return (
     <div className="flex w-screen h-screen overflow-hidden">
@@ -45,7 +45,7 @@ function App() {
         </div>
       </div>
       {workspace && (
-        <div className="flex bg-gray-100 dark:bg-gray-900 w-md overflow-y-auto overflow-x-hidden">
+        <div className="flex bg-gray-100 dark:bg-gray-900 w-md overflow-y-auto overflow-hidden">
           {Workspace}
         </div>
       )}

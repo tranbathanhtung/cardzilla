@@ -1,15 +1,10 @@
 import * as React from "react";
 import { memo } from "react";
-import JSZip from "jszip";
-import { saveAs } from "file-saver";
 import { UploadCloud } from "react-feather";
 import { useRecoilState } from "recoil";
 
 import { IconButton } from "components";
-import rawTemplate from "templates/default/raw";
-import rawApp from "data/raw";
-import saveJsZip from "saveJsZip";
-import * as S from "data";
+import * as S from "selectors";
 
 export const DeployButton = memo(() => {
   

@@ -12,7 +12,7 @@ import {
   PopoverBody,
   PopoverArrow,
 } from "components";
-import * as S from "data";
+import * as S from "selectors";
 
 const colors = [
   "red",

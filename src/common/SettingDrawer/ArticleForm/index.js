@@ -11,8 +11,8 @@ import {
   InputGroup,
   InputRightElement,
 } from "components";
-import * as S from "data";
-import { fetchDevArticles } from "api/dev";
+import * as S from "selectors";
+import { fetchDevArticles } from "services/api/dev";
 
 import { ArticleFields } from "./ArticleFields";
 

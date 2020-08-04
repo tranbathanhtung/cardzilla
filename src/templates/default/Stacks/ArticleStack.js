@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { ChevronRight, ChevronLeft, MessageCircle, Heart } from "react-feather";
 
 import { Link, IconButton } from "components";
-import * as S from "data/schema";
+import * as S from "selectors/schema";
 
 import { useStackDispatcher } from "../context/Stack";
 

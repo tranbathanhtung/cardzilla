@@ -11,8 +11,8 @@ import {
   InputGroup,
   InputRightElement,
 } from "components";
-import * as S from "data";
-import { fetchGithubUser } from "api/github";
+import * as S from "selectors";
+import { fetchGithubUser } from "services/api/github";
 
 import { RepoFields } from "./RepoFields";
 

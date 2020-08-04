@@ -4,7 +4,7 @@ import { Sun, Moon } from "react-feather";
 import { useRecoilState } from "recoil";
 
 import { IconButton } from "components";
-import * as S from "data";
+import * as S from "selectors";
 
 export const ThemeSwitcher = memo(() => {
   const [theme, setTheme] = useRecoilState(S.theme)

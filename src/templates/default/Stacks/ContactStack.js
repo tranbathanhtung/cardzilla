@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { ChevronLeft, MapPin, Mail, Phone } from "react-feather";
 
 import { IconButton, Divider } from "components";
-import * as S from "data/schema";
+import * as S from "selectors/schema";
 
 import { useStackDispatcher } from "../context/Stack";
 

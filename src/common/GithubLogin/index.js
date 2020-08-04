@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 import { Button } from "components";
 import { auth, provider } from "services/firebase";
 import { createUser } from "services/firestore";
-import * as S from "data/user";
+import * as S from "selectors/user";
 
 export const GithubLogin = memo(() => {
   const user = useRecoilValue(S.user);

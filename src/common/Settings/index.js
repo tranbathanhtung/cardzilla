@@ -4,7 +4,7 @@ import { Settings as SettingsIcon } from "react-feather";
 import { useRecoilState } from "recoil";
 
 import { IconButton } from "components";
-import * as S from "data";
+import * as S from "selectors";
 
 export const Settings = memo(() => {
   const [workspace, setWorkspace] = useRecoilState(S.workspace);

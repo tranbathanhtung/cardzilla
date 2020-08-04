@@ -3,7 +3,7 @@ import { memo } from "react";
 import { useRecoilState } from "recoil";
 
 import { Button } from "components";
-import * as S from "data/schema";
+import * as S from "selectors/schema";
 import { Input, Form } from "common/FormFields";
 
 export const ContactForm = memo(({ onClose }) => {

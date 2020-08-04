@@ -27,7 +27,7 @@ import {
   Link,
 } from "components";
 import { News } from "icons";
-import * as S from "data";
+import * as S from "selectors/schema";
 
 import { useStackDispatcher } from "../context/Stack";
 

@@ -20,21 +20,6 @@ function getPopupDimensions() {
 }
 
 export const browser = {
-  setTitle(title) {
-    document.title = title;
-  },
-  alert(message) {
-    return alert(message); // eslint-disable-line no-alert
-  },
-  confirm(message) {
-    return confirm(message); // eslint-disable-line no-alert,no-restricted-globals
-  },
-  onUnload(cb) {
-    window.onbeforeunload = cb;
-  },
-  openWindow(url) {
-    window.open(url, "_blank");
-  },
   openPopup(url, name) {
     const popup = window.open(
       url,
@@ -54,22 +39,5 @@ export const browser = {
         }
       });
     });
-  },
-  reload() {
-    window.location.reload(true);
-  },
-  storage: {
-    get(key) {
-      const value = localStorage.getItem(key);
-
-      if (value) {
-        return JSON.parse(value);
-      }
-
-      return null;
-    },
-    set(key, value) {
-      localStorage.setItem(key, JSON.stringify(value));
-    },
   },
 };

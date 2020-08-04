@@ -3,18 +3,24 @@ import { memo } from "react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { Download as DownloadIcon } from "react-feather";
+import { useRecoilValue } from "recoil";
 
 import { IconButton } from "components";
-import rawTemplate from "templates/default/raw";
-import rawApp from "data/raw";
-import saveJsZip from "saveJsZip";
+import getDefaultTemplate from "templates/default/default-template";
+import getCreateReactApp from "fixtures/create-react-app";
+import saveJsZip from "services/saveJsZip";
+import * as S from "selectors";
 
 export const Download = memo(() => {
+  const schema = useRecoilValue(S.schemaState);
+  const theme = useRecoilValue(S.theme);
   const handleDownload = async () => {
-    const raw = [...rawApp, ...rawTemplate];
-    const { file } = await saveJsZip.create(raw);
+    const createReactApp = getCreateReactApp({ theme });
+    console.log(`export default ${JSON.stringify(schema)}`)
+    const defaultTemplate = getDefaultTemplate(schema);
+    const app = [...createReactApp, ...defaultTemplate];
+    const { file } = await saveJsZip.create(app);
     const content = await JSZip.loadAsync(file);
-
     console.log({ file, content });
     saveAs(file, "cardzilla-template.zip");
   };

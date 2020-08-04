@@ -1,5 +1,5 @@
 import { useState, useCallback, useLayoutEffect } from "react";
-import { localStorageGetItem, localStorageSetItem } from "storage";
+import { localStorageGetItem, localStorageSetItem } from "services/storage";
 // Forked from https://usehooks.com/useLocalStorage/
 export function useLocalStorage(key, initialValue) {
   const getValueFromLocalStorage = useCallback(() => {
