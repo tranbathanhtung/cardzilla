@@ -1,14 +1,29 @@
 import * as React from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 import { Button } from "components";
 import { Input, Textarea, Form } from "common/FormFields";
-import { createOrUpdateSchema } from "services/firestore";
+import {
+  createOrUpdateSchema,
+  createVercelUser,
+  deleteVercelUser,
+} from "services/firestore";
+import { browser } from "services/browser";
 import * as S from "data";
+
+function getDefaultHeaders(token) {
+  if (!token) {
+    throw new Error("You have no Vercel token");
+  }
+
+  return {
+    Authorization: `bearer ${token}`,
+  };
+}
 
 export const Deploy = () => {
   const schema = useRecoilValue(S.schemaState);
-  const user = useRecoilValue(S.user);
+  const [user, setUser] = useRecoilState(S.user);
 
   const onSubmit = async () => {
     // console.log({ schema, user })
@@ -21,7 +36,36 @@ export const Deploy = () => {
   };
 
   async function handleVercelLogin() {
-   
+    try {
+      if (user.vercel && user.vercel.id) {
+        // some how ?
+        await deleteVercelUser(user);
+      }
+
+      const popup = browser.openPopup(
+        `https://vercel.com/oauth/authorize?client_id=${process.env.REACT_APP_VERCEL_CLIENT_ID_DEV}`,
+        "sign in"
+      );
+      const data = await browser.waitForMessage("vercel.sign.in");
+      popup.close();
+      if (data && data.code) {
+        const newVercel = await createVercelUser(user, data.code);
+        setUser({
+          ...user,
+          vercel: newVercel,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function handleVercelLogout() {
+    await deleteVercelUser(user);
+    setUser({
+      ...user,
+      vercel: null,
+    });
   }
 
   return (
@@ -30,13 +74,23 @@ export const Deploy = () => {
         <p className="text-xl text-gray-700 dark:text-gray-200 font-semibold">
           Deploy
         </p>
-        <Button
-          variantColor="gray"
-          className="bg-gray-300"
-          onClick={handleVercelLogin}
-        >
-          Vercel
-        </Button>
+        {!user.vercel ? (
+          <Button
+            variantColor="gray"
+            className="bg-gray-300"
+            onClick={handleVercelLogin}
+          >
+            Vercel
+          </Button>
+        ) : (
+          <Button
+            variantColor="gray"
+            className="bg-gray-300"
+            onClick={handleVercelLogout}
+          >
+            Logout
+          </Button>
+        )}
       </div>
       <div className="my-6 px-4 py-3">
         <Form

@@ -32,15 +32,16 @@ export const getSchemaById = async (schemaId) => {
 export const createSchema = async (newSchema, user) => {
   try {
     const curDate = new Date();
-    // const id = uuidv4();
+    const id = uuidv4();
     const result = await firestore
       .collection("schemas")
-      // .doc(id)
-      .add({
+      .doc(id)
+      .set({
         ...newSchema,
         config: JSON.stringify(newSchema.config),
         userId: user.id,
         createdAt: curDate.toISOString(),
+        id,
       });
     console.log({ result });
   } catch (error) {

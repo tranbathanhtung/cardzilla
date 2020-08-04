@@ -15,10 +15,13 @@ const normalizeUser = (user, vercel) => ({
   vercel: vercel,
 });
 
-const normalizeSchema = schema => ({
+const normalizeSchema = (schema) => ({
   ...schema,
-  config: typeof schema.config === "string" ? JSON.parse(schema.config) : schema.config,
-})
+  config:
+    typeof schema.config === "string"
+      ? JSON.parse(schema.config)
+      : schema.config,
+});
 
 export const Auth = memo(() => {
   const setUser = useSetRecoilState(S.user);
@@ -34,7 +37,7 @@ export const Auth = memo(() => {
           const currentUser = normalizeUser(user, vercel);
           setUser(currentUser);
           console.log({ currentUser, userSchema });
-  
+
           if (userSchema) {
             setSchema(normalizeSchema(userSchema));
             return;
@@ -54,10 +57,35 @@ export const Auth = memo(() => {
             setSchema(normalizeSchema(defaultSchema));
           }
         }
-      } catch(e) {
-        console.log(e)
+      } catch (e) {
+        console.log(e);
       }
     });
+  }, []);
+
+  useEffect(() => {
+    const matchArr = document.location.search.match(/\?code=(.*)/);
+    // eslint-disable-next-line no-unused-vars
+    if (matchArr) {
+      const [_, code] = document.location.search.match(/\?code=(.*)/);
+      if (code) {
+        if (window.opener) {
+          if (window.opener.location.origin === window.location.origin) {
+            window.opener.postMessage(
+              {
+                type: "vercel.sign.in",
+                data: {
+                  code,
+                },
+              },
+              "*"
+            );
+          }
+          return;
+        }
+        return;
+      }
+    }
   }, []);
 
   return null;
