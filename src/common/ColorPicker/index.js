@@ -50,7 +50,7 @@ export const ColorPicker = memo(({ className }) => {
   const buttonRef = useRef(null);
 
   return (
-    <Popover closeOnBlur placement="bottom" initialFocusRef={buttonRef}>
+    <Popover closeOnBlur placement="bottom">
       <PopoverTrigger>
         <IconButton
           variantColor={color}

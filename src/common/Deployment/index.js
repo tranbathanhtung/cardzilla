@@ -15,6 +15,7 @@ import getDefaultTemplate from "templates/default/default-template";
 import getCreateReactApp from "fixtures/create-react-app";
 import saveJsZip from "services/saveJsZip";
 import * as vercelAPI from "services/api/vercel";
+import { REACT_APP_VERCEL_CLIENT_ID } from "constants/env";
 import * as S from "selectors";
 
 import { VercelProjectCard } from "./VercelProjectCard";
@@ -25,6 +26,7 @@ export const Deployment = memo(() => {
   const [saving, setSaving] = useState(false);
   const [vercelInfo, setVercelInfo] = useState(null);
   const theme = useRecoilValue(S.theme);
+  const color = useRecoilValue(S.color);
   const [schema, setSchema] = useRecoilState(S.schemaState);
   const [user, setUser] = useRecoilState(S.user);
   const formRef = useRef({});
@@ -52,6 +54,11 @@ export const Deployment = memo(() => {
     setSchema(newSchema);
 
     const data = await vercelAPI.vercelDeploy(user.vercel, params);
+    
+    if (!data || !user.vercel) {
+      setVercelLoading(false);
+      return;
+    };
 
     const [project, deployments] = await Promise.all([
       vercelAPI.fetchProject(user.vercel, data.name),
@@ -88,7 +95,7 @@ export const Deployment = memo(() => {
       }
 
       const popup = browser.openPopup(
-        `https://vercel.com/oauth/authorize?client_id=${process.env.REACT_APP_VERCEL_CLIENT_ID_DEV}`,
+        `https://vercel.com/oauth/authorize?client_id=${REACT_APP_VERCEL_CLIENT_ID}`,
         "sign in"
       );
       const data = await browser.waitForMessage("vercel.sign.in");
@@ -129,7 +136,7 @@ export const Deployment = memo(() => {
           vercelAPI.fetchProject(user.vercel, schema.name),
           vercelAPI.fetchDeployments(user.vercel, schema.name),
         ]);
-        console.log({ vercelUser, project, deployments });
+
         setVercelInfo({
           user: vercelUser,
           project,
@@ -157,7 +164,7 @@ export const Deployment = memo(() => {
             className="bg-gray-300"
             onClick={handleVercelLogin}
           >
-            Vercel
+            Continue with Vercel
           </Button>
         ) : (
           <Button
@@ -190,7 +197,7 @@ export const Deployment = memo(() => {
             name="name"
             placeholder="Type your name..."
             label="Name"
-            rightAddon=".vercel.app"
+            helperText="* Your url will be name.vercel.app if it doesn't exist"
           />
 
           {vercelLoading && (
@@ -207,11 +214,11 @@ export const Deployment = memo(() => {
 
           <ButtonGroup spacing={3} className="flex flex-no-wrap">
             <Button
-              variantColor="gray"
+              variantColor={color}
               type="submit"
               className="mt-4 bg-gray-300 w-1/2"
               isLoading={vercelLoading}
-              isDisabled={vercelLoading}
+              isDisabled={vercelLoading || !user.vercel}
             >
               Publish
             </Button>

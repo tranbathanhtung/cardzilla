@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Andada-Regular
+font link: https://fonts.google.com/specimen/Andada
+font author: Huerta Tipográfica
+font author site: https://www.huertatipografica.com/en
+
+
+icon designer: David Padrosa
+icon designer link: /david.padrosa
+        
+{"bg":"#FCE0DD","icon-gradient-0":"#EA1F59","icon-gradient-1":"#FA9169","font":"#3E1018","slogan":"#52242c"}
+      

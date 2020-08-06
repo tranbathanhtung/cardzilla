@@ -1,3 +1,11 @@
+import {
+  REACT_APP_VERCEL_CLIENT_ID,
+  REACT_APP_VERCEL_CLIENT_SECRET,
+  IS_PROD,
+} from "constants/env";
+
+const redirectUri = IS_PROD ? "https://cardzilla.vercel.app" : "http://localhost:3000";
+
 const request = (url, options) =>
   fetch(`https://api.vercel.com${url}`, options);
 
@@ -67,7 +75,7 @@ export const fetchAccessToken = async (code) => {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: `client_id=${process.env.REACT_APP_VERCEL_CLIENT_ID_DEV}&client_secret=${process.env.REACT_APP_VERCEL_CLIENT_SECRET_DEV}&code=${code}&redirect_uri=http://localhost:3000`,
+      body: `client_id=${REACT_APP_VERCEL_CLIENT_ID}&client_secret=${REACT_APP_VERCEL_CLIENT_SECRET}&code=${code}&redirect_uri=${redirectUri}`,
     });
     const { access_token } = await response.json();
 
