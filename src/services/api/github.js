@@ -52,7 +52,7 @@ const fetcher = (variables, token) => {
       variables,
     },
     {
-      Authorization: `bearer 04b79e49706d79c7bbb8e30c7504ce11966c51e9`,
+      Authorization: `Bearer 04b79e49706d79c7bbb8e30c7504ce11966c51e9`,
     }
   );
 };

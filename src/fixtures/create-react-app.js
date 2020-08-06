@@ -26,7 +26,11 @@ import StarStr from "!raw-loader!icons/star";
 import IconStr from "!raw-loader!icons";
 
 // fake a CRA
-export default function getCreateReactApp({ title ="", description = "", theme = "light" }) {
+export default function getCreateReactApp({
+  title = "",
+  description = "",
+  theme = "light",
+}) {
   const themeClass = theme === "dark" ? "mode-dark" : "mode-light";
   return [
     // =============== COMPONENTS =================
@@ -72,8 +76,8 @@ export * from "./Tag";`,
       type: "file",
       source: DividerStr,
     },
-     // Link
-     {
+    // Link
+    {
       title: "/src/components/Link/index.js",
       type: "file",
       source: LinkStr,
@@ -265,7 +269,7 @@ export default function App() {
   }, []);
   
   return (
-    <div className="flex flex-wrap p-5 bg-gray-50 relative w-screen h-screen">
+    <div className="flex flex-wrap p-0 md:p-5 bg-gray-50 dark:bg-gray-800 relative w-screen h-screen overflow-y-auto overflow-x-hidden">
       <Template />
     </div>
   );
@@ -323,7 +327,10 @@ module.exports = {
     "react-feather": "^2.0.8",
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
-    "recoil": "^0.0.10"
+    "recoil": "^0.0.10",
+    "remark-parse": "^8.0.3",
+    "remark-react": "^7.0.1",
+    "unified": "^9.1.0"
   },
   "scripts": {
     "prestart": "postcss src/styles/tailwind.css -o src/styles/index.css",

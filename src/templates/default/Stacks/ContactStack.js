@@ -37,32 +37,35 @@ const ContactStack = memo(() => {
       </div>
 
       <div className="px-8">
-
         <h4 className="mb-3">CONTACT</h4>
         <div className="!my-6 space-y-6">
+          {contact.email ? (
+            <div className="flex items-center">
+              <Mail size={24} className="mr-2" />
+              <Divider orientation="vertical" className="!my-0 h-6" />
+              <h5 className="!m-0">{contact.email}</h5>
+            </div>
+          ) : null}
 
-          <div className="flex items-center">
-            <Mail size={18} className="mr-2" />
-            <Divider orientation="vertical" className="!my-0" />
-            <h5>{contact.email}</h5>
-          </div>
+          {contact.phone ? (
+            <div className="flex items-center">
+              <Phone size={24} className="mr-2" />
+              <Divider orientation="vertical" className="!my-0 h-6" />
+              <h5 className="!m-0">{contact.phone}</h5>
+            </div>
+          ) : null}
 
-          <div className="flex items-center">
-            <Phone size={18} className="mr-2" />
-            <Divider orientation="vertical" className="!my-0" />
-            <h5>{contact.phone}</h5>
-          </div>
-
-          <div className="flex items-center">
-            <MapPin size={18} className="mr-2" />
-            <Divider orientation="vertical" className="!my-0" />
-            <h5>{contact.address}</h5>
-          </div>
-
+          {contact.address ? (
+            <div className="flex items-center">
+              <MapPin size={24} className="mr-2" />
+              <Divider orientation="vertical" className="!my-0 h-6" />
+              <h5 className="!m-0">{contact.address}</h5>
+            </div>
+          ) : null}
         </div>
       </div>
     </>
   );
-})
+});
 
 export default ContactStack;

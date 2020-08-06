@@ -5,6 +5,7 @@ export { default as Link } from "./Link";
 export { default as Divider } from "./Divider";
 export { default as Tabs } from "./Tabs";
 export * from "./Tabs";
+export * from "./Modal";
 
 export { default as IconButton } from "./IconButton";
 export { default as Input } from "./Input";

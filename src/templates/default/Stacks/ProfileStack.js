@@ -1,6 +1,9 @@
 import * as React from "react";
 import { memo, useCallback } from "react";
 import { useRecoilValue } from "recoil";
+import unified from "unified";
+import parse from "remark-parse";
+import remark2react from "remark-react";
 import {
   Facebook,
   Instagram,
@@ -73,11 +76,27 @@ const getDataFromSocial = (social) => {
         icon: Twitch,
         color: "purple",
       };
+    case "github":
+      return {
+        icon: GitHub,
+        color: "gray",
+      };
     default:
       return {};
   }
 };
 
+const BioLink = (props) => {
+  const color = useRecoilValue(S.color);
+
+  return (
+    <Link
+      className={`font-semibold !text-${color}-500`}
+      target="_blank"
+      {...props}
+    />
+  );
+};
 const ProfileStack = memo(() => {
   const dispatch = useStackDispatcher();
   const profile = useRecoilValue(S.profile);
@@ -92,7 +111,7 @@ const ProfileStack = memo(() => {
 
   return (
     <div className="flex flex-col overflow-hidden w-full h-full absolute top-0 bottom-0">
-      <div className="relative overflow-y-auto overflow-x-hidden flex flex-col z-1 h-full hide-scrollbar">
+      <div className="relative overflow-y-auto overflow-x-hidden flex flex-col z-1 h-full">
         <div className="relative flex w-full flex-shrink-0 h-64">
           <Badge
             className="absolute top-4 left-4"
@@ -110,71 +129,71 @@ const ProfileStack = memo(() => {
           <h3 className="absolute bottom-0 left-1/2 whitespace-no-wrap transform -translate-x-1/2 -translate-y-4 text-center">
             {profile.name}
           </h3>
-          <div className="flex items-center absolute bottom-0 left-1/2 whitespace-no-wrap transform -translate-x-1/2 -translate-y-0">
-            <MapPin size={18} className="mr-2" />
-            <h5>{profile.address}</h5>
-          </div>
+
+          {profile.address && (
+            <div className="flex items-center absolute bottom-0 left-1/2 whitespace-no-wrap transform -translate-x-1/2 -translate-y-0">
+              <MapPin size={18} className="mr-2" />
+              <h5>{profile.address}</h5>
+            </div>
+          )}
         </div>
 
         <div className="relative flex flex-col px-8">
-          <div className="my-2">
-            <p className="text-center">
-              he/him. Building{" "}
-              <Link href="#" className={`font-semibold !text-${color}-500`}>
-                @tailzilla
-              </Link>{" "}
-              and{" "}
-              <Link href="#" className={`font-semibold !text-${color}-500`}>
-                @cardzilla
-              </Link>
-              . Past: dev{" "}
-              <Link href="#" className={`font-semibold !text-${color}-500`}>
-                @logivan
-              </Link>
-              ,{" "}
-              <Link href="#" className={`font-semibold !text-${color}-500`}>
-                @solid.engineer
-              </Link>
-            </p>
+          <div className="my-2 text-center">
+            {
+              unified()
+                .use(parse)
+                .use(remark2react, {
+                  remarkReactComponents: {
+                    a: BioLink,
+                  },
+                })
+                .processSync(profile.bio).result
+            }
           </div>
 
-          <div className="my-2">
-            <ButtonGroup spacing="6" className="flex justify-center">
-              {profile.socials?.map((social) => {
-                const { color, icon: Icon } = getDataFromSocial(social);
-                return (
-                  <IconButton
-                    key={social.type}
-                    size="md"
-                    onClick={() => {}}
-                    variantColor={color}
-                    variant="solid"
-                    isRound
-                    aria-label=""
-                  >
-                    <Icon size={18} />
-                  </IconButton>
-                );
-              })}
-            </ButtonGroup>
-          </div>
+          {profile.socials?.length ? (
+            <div className="my-2">
+              <ButtonGroup spacing="6" className="flex justify-center">
+                {profile.socials.map((social, idx) => {
+                  const { color, icon: Icon } = getDataFromSocial(social);
+                  return (
+                    <Link href={social.link} target="_blank">
+                      <IconButton
+                        key={idx}
+                        size="md"
+                        variantColor={color}
+                        variant="solid"
+                        isRound
+                        aria-label=""
+                      >
+                        <Icon size={18} />
+                      </IconButton>
+                    </Link>
+                  );
+                })}
+              </ButtonGroup>
+            </div>
+          ) : null}
         </div>
 
-        <div className="flex flex-col px-8 py-2">
-          <h6 className="uppercase">Skills</h6>
-          <div className="flex flex-wrap list-none my-5">
-            {profile.skills?.map((skill, idx) => (
-              <div className="mr-2 mb-2" key={idx}>
-                <Tag variantColor={skill.color || "gray"}>
-                  <TagLabel>{skill.name}</TagLabel>
-                </Tag>
-              </div>
-            ))}
+        {profile.skills?.length ? (
+          <div className="flex flex-col px-8 py-2">
+            <h5 className="uppercase">skills</h5>
+            <div className="flex flex-wrap list-none my-5">
+              {profile.skills.map((skill, idx) => (
+                <div className="mr-2 mb-2" key={idx}>
+                  <Tag variantColor={skill.color || "gray"}>
+                    <TagLabel>{skill.name}</TagLabel>
+                  </Tag>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
 
-        <div className="px-8 py-2">
-          <div className="w-full">
+        <div className="flex flex-1 px-8 pt-2 pb-6">
+          <div className="flex flex-col justify-start w-full">
             <Button
               size="md"
               variantColor="gray"

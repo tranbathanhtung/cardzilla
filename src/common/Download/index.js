@@ -16,7 +16,6 @@ export const Download = memo(() => {
   const theme = useRecoilValue(S.theme);
   const handleDownload = async () => {
     const createReactApp = getCreateReactApp({ theme });
-    console.log(`export default ${JSON.stringify(schema)}`)
     const defaultTemplate = getDefaultTemplate(schema);
     const app = [...createReactApp, ...defaultTemplate];
     const { file } = await saveJsZip.create(app);
@@ -29,7 +28,8 @@ export const Download = memo(() => {
       size="md"
       variantColor="gray"
       variant="solid"
-      aria-label="Settings"
+      aria-label="Download"
+      title="Download"
       className="bg-gray-300"
       onClick={handleDownload}
     >

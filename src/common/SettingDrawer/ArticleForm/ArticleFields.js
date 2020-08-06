@@ -1,14 +1,29 @@
 import * as React from "react";
+import { useState } from "react";
 import { useFieldArray } from "react-hook-form";
 import { Trash2 } from "react-feather";
 
-import { Input, FormControl, FormLabel, IconButton } from "components";
+import {
+  Input,
+  FormControl,
+  FormLabel,
+  IconButton,
+  Button,
+} from "components";
+
+import { IsolateArticleFields } from "./IsolateArticleFields";
+import { ArticleModal } from "./ArticleModal";
 
 export const ArticleFields = ({ control, register }) => {
-  const { fields, remove } = useFieldArray({
+  const [isOpen, setIsOpen] = useState(false);
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "articles",
   });
+
+  const handleSubmit = (newArticle) => {
+    append(newArticle);
+  };
 
   return (
     <div className="flex flex-col space-y-4">
@@ -87,6 +102,19 @@ export const ArticleFields = ({ control, register }) => {
           </li>
         ))}
       </ul>
+      <Button
+        variantColor="gray"
+        className="w-full bg-gray-300"
+        onClick={() => setIsOpen(true)}
+      >
+        Add Article
+      </Button>
+      <ArticleModal
+        isOpen={isOpen}
+        handleClose={() => setIsOpen(false)}
+        onSubmit={handleSubmit}
+      />
+      <IsolateArticleFields control={control} fields={fields} name="articles" />
     </div>
   );
 };

@@ -1,13 +1,7 @@
 import * as React from "react";
 import { memo } from "react";
 
-import {
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-} from "components";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "components";
 
 import { ProfileForm } from "./ProfileForm";
 import { ContactForm } from "./ContactForm";
@@ -16,8 +10,6 @@ import { ArticleForm } from "./ArticleForm";
 
 const tabClass =
   "inline-flex appearance-none items-center justify-center transition-all duration-200 select-none relative whitespace-no-wrap align-middle leading-tight outline-none focus:outline-none h-10 min-w-10 text-base px-4 focus:shadow-outline selected:bg-gray-300 active:bg-gray-300 dark:selected:bg-whiteAlpha-200 dark:active:bg-whiteAlpha-400 outline-none focus:outline-none cursor-pointer focus:z-10 disabled:opacity-40 disabled:cursor-not-allowed text-base py-4 flex-1 font-semibold rounded-md";
-
-const onClose = () => {};
 
 export const SettingDrawer = memo((props) => {
   return (
@@ -32,16 +24,16 @@ export const SettingDrawer = memo((props) => {
 
         <TabPanels className="my-6 px-4 py-3">
           <TabPanel className="focus:outline-none">
-            <ProfileForm onClose={onClose} />
+            <ProfileForm />
           </TabPanel>
           <TabPanel className="focus:outline-none">
-            <GithubForm onClose={onClose} />
+            <GithubForm />
           </TabPanel>
           <TabPanel className="focus:outline-none">
-            <ArticleForm onClose={onClose} />
+            <ArticleForm />
           </TabPanel>
           <TabPanel className="focus:outline-none">
-            <ContactForm onClose={onClose} />
+            <ContactForm />
           </TabPanel>
         </TabPanels>
       </Tabs>

@@ -36,7 +36,7 @@ const normalizeUser = (user) => {
   };
 };
 
-export const GithubForm = memo(({ onClose }) => {
+export const GithubForm = memo(() => {
   const color = useRecoilValue(S.color);
   const [github, setGithub] = useRecoilState(S.github);
   const { register, handleSubmit, control, getValues, reset } = useForm({
@@ -46,9 +46,7 @@ export const GithubForm = memo(({ onClose }) => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (data) => {
-    console.log({ data })
     setGithub(data);
-    onClose();
   };
 
   const handleLoadGithubUsername = useCallback(async () => {
@@ -58,16 +56,18 @@ export const GithubForm = memo(({ onClose }) => {
       const user = await fetchGithubUser(username);
       setLoading(false);
       const githubConfig = normalizeUser({ username, ...user });
-      console.log({ user, githubConfig })
+      console.log({ user, githubConfig });
       reset(githubConfig);
+      setGithub(githubConfig);
     } catch (err) {
       setLoading(false);
-      console.log(err)
+      console.log(err);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getValues, reset]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onChange={handleSubmit(onSubmit)} className="space-y-4">
       <FormControl>
         <FormLabel htmlFor="username">Username</FormLabel>
         <InputGroup size="md" className="mt-4">
@@ -145,10 +145,6 @@ export const GithubForm = memo(({ onClose }) => {
       />
 
       <RepoFields control={control} register={register} />
-
-      <Button className="mt-4" variantColor="gray" type="submit" className="bg-gray-300">
-        Preview
-      </Button>
     </form>
   );
 });

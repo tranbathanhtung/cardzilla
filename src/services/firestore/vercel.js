@@ -24,7 +24,7 @@ export const deleteVercelUser = async (user) => {
   }
 }
 
-export const createVercelUser = async (user, vercelCode) => {
+export const createVercelUser = async (user, token) => {
   if (!user.id) {
     return null;
   }
@@ -33,7 +33,7 @@ export const createVercelUser = async (user, vercelCode) => {
     const curDate = new Date();
     const id = uuidv4();
     const newVercel = {
-      code: vercelCode,
+      token,
       userId: user.id,
       createdAt: curDate.toISOString(),
       id,

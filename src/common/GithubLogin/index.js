@@ -3,38 +3,22 @@ import { memo } from "react";
 import { GitHub } from "react-feather";
 import { useRecoilValue } from "recoil";
 
-import { Button } from "components";
+import { Button, Avatar } from "components";
 import { auth, provider } from "services/firebase";
-import { createUser } from "services/firestore";
 import * as S from "selectors/user";
+
+const getFirstName = (name) => {
+  if (typeof name !== "string") return name;
+  const listName = name.split(" ");
+  return listName?.[0];
+};
 
 export const GithubLogin = memo(() => {
   const user = useRecoilValue(S.user);
 
   const handleAuth = () => {
-    // console.log(auth())
-    // auth().signOut();
     if (!auth().currentUser || !user) {
-      auth()
-        .signInWithPopup(provider)
-        .then(function (result) {
-          // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-          const token = result.credential.accessToken;
-          // The signed-in user info.
-          const user = result.user;
-          // ...
-        })
-        .catch(function (error) {
-          // Handle Errors here.
-          console.log(error);
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // The email of the user's account used.
-          const email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          const credential = error.credential;
-          // ...
-        });
+      auth().signInWithPopup(provider);
     } else {
       auth().signOut();
     }
@@ -49,7 +33,18 @@ export const GithubLogin = memo(() => {
           className="bg-gray-300"
           onClick={handleAuth}
         >
-          Logout
+          <Avatar
+            size="sm"
+            name={user.displayName}
+            src={user.photoURL}
+            style={{
+              height: 28,
+              width: 28,
+            }}
+          />
+          <span className="text-sm font-semibold mr-2 ml-2 truncate">
+            {getFirstName(user.displayName)}
+          </span>
         </Button>
       ) : (
         <Button

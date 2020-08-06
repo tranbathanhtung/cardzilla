@@ -42,7 +42,6 @@ export const github = selector({
         github,
       },
     };
-
     set(schemaState, newSchema);
   },
 });

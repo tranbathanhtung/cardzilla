@@ -17,7 +17,7 @@ const DetailStackContainer = () => {
       case "dev":
         return <ArticleStack />;
       case "contact":
-        return <ContactStack />
+        return <ContactStack />;
       default:
         return null;
     }
@@ -27,7 +27,7 @@ const DetailStackContainer = () => {
     <div className="flex flex-col overflow-hidden w-full h-full absolute top-0 bottom-0 left-full">
       {Stack}
     </div>
-  )
-}
+  );
+};
 
 export default DetailStackContainer;

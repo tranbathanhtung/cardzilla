@@ -10,7 +10,7 @@ import ProfileStackStr from "!raw-loader!./Stacks/ProfileStack";
 import StacksStr from "!raw-loader!./Stacks";
 
 import StackContextStr from "!raw-loader!./context/Stack";
- 
+
 export default function getDefaultTemplate(schema) {
   return [
     {
@@ -28,7 +28,7 @@ export default function getDefaultTemplate(schema) {
       type: "file",
       source: `export default ${JSON.stringify(schema)}`,
     },
-  
+
     // Stacks folder
     {
       title: "/src/Stacks/index.js",

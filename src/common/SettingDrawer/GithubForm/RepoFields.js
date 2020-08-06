@@ -1,12 +1,11 @@
 import * as React from "react";
 import { memo } from "react";
 import { useFieldArray } from "react-hook-form";
-import { Trash2 } from "react-feather";
 
-import { Input, FormControl, FormLabel, IconButton } from "components";
+import { Input, FormControl, FormLabel } from "components";
 
 export const RepoFields = memo(({ control, register }) => {
-  const { fields, remove } = useFieldArray({
+  const { fields } = useFieldArray({
     control,
     name: "repos",
   });
@@ -95,20 +94,9 @@ export const RepoFields = memo(({ control, register }) => {
               placeholder=""
               defaultValue={item.fork}
             />
-
-            <IconButton
-              size="md"
-              variantColor="red"
-              variant="solid"
-              aria-label="Delete"
-              onClick={() => remove(index)}
-            >
-              <Trash2 size={18} />
-            </IconButton>
           </li>
         ))}
       </ul>
-  
     </div>
   );
 });

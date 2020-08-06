@@ -10,6 +10,7 @@ import {
   Button,
   InputGroup,
   InputRightElement,
+  FormHelperText,
 } from "components";
 import * as S from "selectors";
 import { fetchDevArticles } from "services/api/dev";
@@ -17,17 +18,6 @@ import { fetchDevArticles } from "services/api/dev";
 import { ArticleFields } from "./ArticleFields";
 
 const normalizeArticles = (user) => {
-  // return {
-  //   username: user.username,
-  //   htmlUrl: `https://dev.to/${user.username}`,
-  //   articles: user.articles?.map((article) => ({
-  //     title: article.title,
-  //     description: article.description,
-  //     htmlUrl: article.url,
-  //     comment: article.comments_count,
-  //     reaction: article.positive_reactions_count,
-  //   })),
-  // };
   return user.articles?.map((article) => ({
     title: article.title,
     description: article.description,
@@ -37,19 +27,14 @@ const normalizeArticles = (user) => {
   }));
 };
 
-export const ArticleForm = memo(({ onClose }) => {
+export const ArticleForm = memo(() => {
   const color = useRecoilValue(S.color);
-  const [articles, setArticles] = useRecoilState(S.articles);
-  const { register, handleSubmit, control, getValues, reset } = useForm({
+  const [articles] = useRecoilState(S.articles);
+  const { register, control, getValues, reset } = useForm({
     defaultValues: { articles },
   });
 
   const [loading, setLoading] = useState(false);
-
-  const onSubmit = (data) => {
-    setArticles(data.articles);
-    onClose();
-  };
 
   const handleLoadDevUsername = useCallback(async () => {
     try {
@@ -69,7 +54,7 @@ export const ArticleForm = memo(({ onClose }) => {
   }, [getValues, reset]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form className="space-y-4">
       <FormControl>
         <FormLabel htmlFor="username">Username</FormLabel>
         <InputGroup size="md" className="mt-4">
@@ -93,22 +78,12 @@ export const ArticleForm = memo(({ onClose }) => {
             </Button>
           </InputRightElement>
         </InputGroup>
+        <FormHelperText>
+          * You can load your articles from dev.to or add manually.
+        </FormHelperText>
       </FormControl>
 
-      {/* <Input
-        type="hidden"
-        variant="outline"
-        ref={register()}
-        id="htmlUrl"
-        name="htmlUrl"
-        placeholder=""
-      /> */}
-
       <ArticleFields control={control} register={register} />
-
-      <Button className="mt-4" variantColor="gray" type="submit" className="bg-gray-300">
-        Preview
-      </Button>
     </form>
   );
 });

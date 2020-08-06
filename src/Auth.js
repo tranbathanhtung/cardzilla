@@ -1,12 +1,11 @@
-import * as React from "react";
-import { memo, useEffect } from "react";
-import { useSetRecoilState, useRecoilState } from "recoil";
+import { memo } from "react";
+import { useSetRecoilState } from "recoil";
 
 import { auth } from "services/firebase";
 import { getSchemaByUserId, getVercelUserByUserId } from "services/firestore";
-import * as S from "selectors/user";
-import { schemaState } from "selectors/schema";
+import * as S from "selectors";
 import defaultSchema from "fixtures/defaultSchema";
+import { useMount } from "hooks/useMount";
 
 const normalizeUser = (user, vercel) => ({
   id: user.uid,
@@ -15,18 +14,32 @@ const normalizeUser = (user, vercel) => ({
   vercel: vercel,
 });
 
-const normalizeSchema = (schema) => ({
-  ...schema,
-  config:
-    typeof schema.config === "string"
-      ? JSON.parse(schema.config)
-      : schema.config,
-});
+const normalizeSchema = (userSchema, defaultSchema) => {
+  const schema = userSchema || defaultSchema;
+
+  if (schema.theme === "dark") {
+    document.body.classList.add("mode-dark");
+    document.body.classList.remove("mode-light");
+  } else {
+    document.body.classList.add("mode-light");
+    document.body.classList.remove("mode-dark");
+  }
+
+  return {
+    ...schema,
+    config:
+      typeof schema.config === "string"
+        ? JSON.parse(schema.config)
+        : schema.config,
+  };
+};
 
 export const Auth = memo(() => {
   const setUser = useSetRecoilState(S.user);
-  const [schema, setSchema] = useRecoilState(schemaState);
-  useEffect(() => {
+  const setSchema = useSetRecoilState(S.schemaState);
+  const setWorkspace = useSetRecoilState(S.workspace);
+
+  useMount(() => {
     auth().onAuthStateChanged(async function (user) {
       try {
         if (user) {
@@ -36,38 +49,26 @@ export const Auth = memo(() => {
           ]);
           const currentUser = normalizeUser(user, vercel);
           setUser(currentUser);
-          console.log({ currentUser, userSchema });
-
-          if (userSchema) {
-            setSchema(normalizeSchema(userSchema));
-            return;
-          } else if (schema) {
-            // keep user's work
-            setSchema(normalizeSchema(schema));
-            return;
-          } else {
-            setSchema(normalizeSchema(defaultSchema));
-          }
+          setWorkspace("");
+          if (!userSchema) return;
+          const latestSchema = normalizeSchema(userSchema, defaultSchema);
+          setSchema(latestSchema);
         } else {
           setUser(null);
-          if (schema) {
-            setSchema(normalizeSchema(schema));
-            return;
-          } else {
-            setSchema(normalizeSchema(defaultSchema));
-          }
+          setWorkspace("");
+          const latestSchema = normalizeSchema(null, defaultSchema);
+          setSchema(latestSchema);
         }
-
       } catch (e) {
         console.log(e);
       }
     });
-  }, []);
+  });
 
-  useEffect(() => {
+  useMount(() => {
     const matchArr = document.location.search.match(/\?code=(.*)/);
-    // eslint-disable-next-line no-unused-vars
     if (matchArr) {
+      // eslint-disable-next-line no-unused-vars
       const [_, code] = document.location.search.match(/\?code=(.*)/);
       if (code) {
         if (window.opener) {
@@ -87,7 +88,7 @@ export const Auth = memo(() => {
         return;
       }
     }
-  }, []);
+  });
 
   return null;
 });

@@ -332,6 +332,9 @@ module.exports = {
         "5xl": "64rem",
         "6xl": "72rem",
       },
+      height: {
+        "3xl": "48rem",
+      },
       opacity: {
         "40": "0.4",
       },
@@ -395,7 +398,7 @@ module.exports = {
     opacity: ["hover", "focus", "disabled"],
     textDecoration: ["important"],
     placeholderColor: ["focus", "dark:focus"],
-    typography: ["dark:typography"],
+    typography: ["responsive", "dark:typography"],
 
     accessibility: [],
     alignContent: [],
@@ -431,7 +434,6 @@ module.exports = {
     rotate: [],
     scale: [],
     skew: [],
-    space: [],
     stroke: [],
     strokeWidth: [],
     tableLayout: [],
@@ -489,7 +491,6 @@ module.exports = {
     gridRowEnd: false,
     gap: false,
     gridAutoFlow: false,
-    space: false,
     backgroundAttachment: false,
     divideColor: false,
     divideWidth: false,

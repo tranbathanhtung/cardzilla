@@ -5,15 +5,15 @@ import classNames from "classnames";
 const Divider = forwardRef(({ orientation, className, ...props }, ref) => {
   const borderClass =
     orientation === "vertical"
-      ? "border-l border-solid h-auto mx-2"
-      : "border-b border-solid w-auto my-2";
+      ? "border-l border-solid mx-2"
+      : "border-b border-solid my-2";
 
   const dividerClass = classNames(
     "border-0 opacity-60",
     borderClass,
     "border-current",
     className,
-  )
+  );
 
   return (
     <hr

@@ -6,11 +6,14 @@ import { Trash2 } from "react-feather";
 import {
   Input,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Button,
   Select,
   IconButton,
 } from "components";
+
+import { IsolateProfileFields } from "./IsolateProfileFields";
 
 const colors = [
   "gray",
@@ -25,7 +28,7 @@ const colors = [
   "pink",
 ];
 
-export const SkillFields = memo(({ control, register }) => {
+export const SkillFields = memo(({ control, register, errors }) => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: "skills",
@@ -40,16 +43,26 @@ export const SkillFields = memo(({ control, register }) => {
             key={item.id}
             className="w-full flex flex-no-wrap items-end space-x-4"
           >
-            <FormControl className="w-1/2">
+            <FormControl
+              className="w-1/2"
+              isInvalid={errors.skills?.[index]?.name}
+            >
               <FormLabel htmlFor={`skills[${index}].name`}>Name</FormLabel>
               <Input
                 variant="outline"
-                ref={register()}
+                ref={register({
+                  required: "name is required",
+                })}
                 id={`skills[${index}].name`}
                 name={`skills[${index}].name`}
                 placeholder="Type your skill..."
                 defaultValue={item.name}
               />
+              {errors.skills && (
+                <FormErrorMessage>
+                  {errors.skills?.[index]?.name?.message}
+                </FormErrorMessage>
+              )}
             </FormControl>
 
             <FormControl className="w-1/2">
@@ -84,10 +97,15 @@ export const SkillFields = memo(({ control, register }) => {
         ))}
       </ul>
       {fields.length < 5 && (
-        <Button onClick={append} className="w-full" variantColor="gray" className="bg-gray-300">
+        <Button
+          onClick={append}
+          variantColor="gray"
+          className="w-full bg-gray-300"
+        >
           Add skill
         </Button>
       )}
+      <IsolateProfileFields control={control} fields={fields} name="skills" />
     </div>
   );
 });

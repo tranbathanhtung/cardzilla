@@ -14,11 +14,11 @@ const Article = memo(({ article }) => (
     href={article.htmlUrl}
     target="_blank"
   >
-    <div className="flex w-full mb-3 px-2 bg-gray-50 dark:bg-gray-600 rounded-md shadow hover:shadow-lg cursor-pointer transition-shadow duration-200">
+    <div className="flex w-full mb-3 px-2 bg-gray-50 hover:bg-gray-100 dark:bg-whiteAlpha-200 dark:hover:bg-whiteAlpha-300 rounded-md shadow hover:shadow-lg cursor-pointer transition-all duration-200">
       <div className="flex p-3 w-full">
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between relative">
-            <h5 className="text-xl font-semibold text-gray-700 dark:text-gray-200 underline">
+            <h5 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
               {article.title}
             </h5>
             <div className="flex h-full mt-4">
@@ -28,7 +28,10 @@ const Article = memo(({ article }) => (
           <p className="!my-2">{article.description}</p>
           <div className="flex !my-2">
             <div className="flex items-center !no-underline">
-              <Heart size={18} className="mr-2 text-pink-600 dark:text-pink-300" />
+              <Heart
+                size={18}
+                className="mr-2 text-pink-600 dark:text-pink-300"
+              />
               <span>{article.reaction}</span>
             </div>
             <span aria-hidden="true" className="mx-3">
@@ -76,19 +79,7 @@ const ArticleStack = memo(() => {
         </div>
       </div>
 
-      <div className="px-8 overflow-y-auto hide-scrollbar">
-        {/* <div className="my-3">
-          <Link
-            href={dev.htmlUrl}
-            target="_blank"
-            className="w-full !no-underline"
-          >
-            <Button variantColor="gray" className="w-full">
-              Follow
-            </Button>
-          </Link>
-        </div> */}
-
+      <div className="px-8 overflow-y-auto">
         <h4 className="mb-3 uppercase">Articles</h4>
         <div className="my-3">
           {articles?.map((article, idx) => (

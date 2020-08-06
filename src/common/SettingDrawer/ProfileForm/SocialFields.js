@@ -12,6 +12,8 @@ import {
   IconButton,
 } from "components";
 
+import { IsolateProfileFields } from "./IsolateProfileFields";
+
 const socialTypes = [
   {
     type: "facebook",
@@ -44,6 +46,10 @@ const socialTypes = [
   {
     type: "codesandbox",
     name: "Codesandbox",
+  },
+  {
+    type: "github",
+    name: "Github",
   },
 ];
 
@@ -106,10 +112,16 @@ export const SocialFields = memo(({ control, register }) => {
         ))}
       </ul>
       {fields.length < 5 && (
-        <Button onClick={append} className="w-full" variantColor="gray" className="bg-gray-300">
+        <Button
+          onClick={append}
+          variantColor="gray"
+          className="w-full bg-gray-300"
+        >
           Add Social
         </Button>
       )}
+
+      <IsolateProfileFields control={control} fields={fields} name="socials" />
     </div>
   );
 });

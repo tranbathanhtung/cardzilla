@@ -87,6 +87,9 @@ module.exports = {
         "5xl": "64rem",
         "6xl": "72rem",
       },
+      height: {
+        "3xl": "48rem",
+      },
       opacity: {
         "40": "0.4",
       },
@@ -150,7 +153,7 @@ module.exports = {
     opacity: ["hover", "focus", "disabled"],
     textDecoration: ["important"],
     placeholderColor: ["focus", "dark:focus"],
-    typography: ["dark:typography"],
+    typography: ["responsive", "dark:typography"],
   },
   plugins: [
     require("./tailwind/plugins/important"),

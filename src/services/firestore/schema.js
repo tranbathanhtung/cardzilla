@@ -71,7 +71,7 @@ export const createOrUpdateSchema = async (newSchema, user) => {
     createSchema(newSchema, user);
     return;
   }
-  const schema = await getSchemaById(newSchema.id);
+  // const schema = await getSchemaById(newSchema.id);
   if (!newSchema) {
     // create
     createSchema(newSchema, user);

@@ -2,20 +2,43 @@ import * as React from "react";
 
 import {
   Textarea as CharkaTextarea,
+  InputGroup,
   FormControl,
   FormLabel,
+  FormHelperText,
+  FormErrorMessage,
+  InputRightAddon,
 } from "components";
 
-const Textarea = ({ register, name, isDisabled, label, ...rest }) => {
+const Textarea = ({
+  register,
+  registerOptions = {},
+  name,
+  isDisabled,
+  label,
+  helperText = "",
+  rightAddon = "",
+  errors,
+  errorMessage,
+  ...rest
+}) => {
+
   return (
-    <FormControl isDisabled={isDisabled}>
+    <FormControl isDisabled={isDisabled} isInvalid={!!errors[name]}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
-      <CharkaTextarea
-        ref={register()}
-        id={name}
-        name={name}
-        {...rest}
-      />
+      <InputGroup>
+        <CharkaTextarea
+          ref={register(registerOptions)}
+          id={name}
+          name={name}
+          {...rest}
+        />
+        {rightAddon && (
+          <InputRightAddon children={rightAddon} className="bg-gray-200" />
+        )}
+      </InputGroup>
+      <FormHelperText>{helperText}</FormHelperText>
+      {errors[name] && <FormErrorMessage>{errors[name]?.message || errorMessage}</FormErrorMessage>}
     </FormControl>
   );
 };

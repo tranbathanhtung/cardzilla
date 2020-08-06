@@ -23,6 +23,9 @@
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
     "recoil": "^0.0.10",
+    "remark-parse": "^8.0.3",
+    "remark-react": "^7.0.1",
+    "unified": "^9.1.0",
     "uuid": "^8.3.0"
   },
   "scripts": {

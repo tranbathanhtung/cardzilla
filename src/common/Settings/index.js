@@ -19,6 +19,7 @@ export const Settings = memo(() => {
       variantColor="gray"
       variant="solid"
       aria-label="Settings"
+      title="Settings"
       className="bg-gray-300"
       onClick={handleWorkspace}
     >
