@@ -29,7 +29,6 @@ export default firebase.initializeApp(firebaseConfig);
 const provider = new firebase.auth.GithubAuthProvider();
 
 provider.addScope("user");
-provider.addScope("repo");
 
 const { auth, firestore: fs } = firebase;
 

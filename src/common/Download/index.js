@@ -20,7 +20,6 @@ export const Download = memo(() => {
     const app = [...createReactApp, ...defaultTemplate];
     const { file } = await saveJsZip.create(app);
     const content = await JSZip.loadAsync(file);
-    console.log({ file, content });
     saveAs(file, "cardzilla-template.zip");
   };
   return (

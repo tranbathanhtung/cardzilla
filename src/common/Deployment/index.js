@@ -42,7 +42,7 @@ export const Deployment = memo(() => {
     const app = [...createReactApp, ...defaultTemplate];
     const { file } = await saveJsZip.create(app);
     const contents = await JSZip.loadAsync(file);
-    
+
     const params = await getVercelParams(contents, name);
 
     const newSchema = {
@@ -52,25 +52,22 @@ export const Deployment = memo(() => {
       trackingId,
     };
 
-    setSchema(newSchema);
-
     const data = await vercelAPI.vercelDeploy(user.vercel, params);
-    
+
     if (!data || !user.vercel) {
       setVercelLoading(false);
       return;
-    };
+    }
 
-    const [project, deployments] = await Promise.all([
+    const [project, createdOrUpdatedSchema] = await Promise.all([
       vercelAPI.fetchProject(user.vercel, data.name),
-      vercelAPI.fetchDeployments(user.vercel, data.name),
       createOrUpdateSchema(newSchema, user),
     ]);
 
+    setSchema(createdOrUpdatedSchema);
     setVercelInfo({
       ...vercelInfo,
       project,
-      deployments,
     });
     setVercelLoading(false);
   };
@@ -84,9 +81,10 @@ export const Deployment = memo(() => {
       title,
       trackingId,
     };
-    setSchema(newSchema);
-    await createOrUpdateSchema(newSchema, user);
+    const createdOrUpdatedSchema = await createOrUpdateSchema(newSchema, user);
+    console.log({ createdOrUpdatedSchema })
     setSaving(false);
+    setSchema(createdOrUpdatedSchema);
   };
 
   async function handleVercelLogin() {
@@ -128,28 +126,26 @@ export const Deployment = memo(() => {
     if (!user) {
       setVercelInfo(null);
       return;
-    };
+    }
     if (user.vercel) {
       // fetch vercel data
       (async () => {
         setVercelLoading(true);
-        const [vercelUser, project, deployments] = await Promise.all([
+        const [vercelUser, project] = await Promise.all([
           vercelAPI.fetchVercelUser(user.vercel),
           vercelAPI.fetchProject(user.vercel, schema.name),
-          vercelAPI.fetchDeployments(user.vercel, schema.name),
         ]);
 
         setVercelInfo({
           user: vercelUser,
           project,
-          deployments,
         });
         setVercelLoading(false);
       })();
     } else {
       setVercelInfo(null);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.vercel]);
 
   if (!user) return null;

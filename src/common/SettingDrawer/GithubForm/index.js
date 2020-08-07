@@ -56,7 +56,6 @@ export const GithubForm = memo(() => {
       const user = await fetchGithubUser(username);
       setLoading(false);
       const githubConfig = normalizeUser({ username, ...user });
-      console.log({ user, githubConfig });
       reset(githubConfig);
       setGithub(githubConfig);
     } catch (err) {

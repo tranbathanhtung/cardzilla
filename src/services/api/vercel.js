@@ -41,27 +41,12 @@ export const fetchVercelUser = async (vercel) => {
 
 export async function fetchProject(vercel, name = "") {
   try {
+    if (!name) return null;
     const response = await request(`/v1/projects/${name}`, {
       headers: getDefaultHeaders(vercel?.token),
     });
     const data = await response.json();
     return data;
-  } catch (e) {
-    console.log(e);
-    return null;
-  }
-}
-
-export async function fetchDeployments(vercel, name = "") {
-  try {
-    const response = await request(`/v5/now/deployments`, {
-      headers: getDefaultHeaders(vercel?.token),
-    });
-    const data = await response.json();
-    const deploysNoAlias = data.deployments
-      .filter((d) => d.name === name)
-      .sort((a, b) => (a.created < b.created ? 1 : -1));
-    return deploysNoAlias;
   } catch (e) {
     console.log(e);
     return null;

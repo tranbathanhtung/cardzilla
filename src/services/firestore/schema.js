@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { normalizeSchema } from "services/normalizeData";
 import { firestore } from "../firebase";
 
 export const getSchemaByUserId = async (userId) => {
@@ -33,51 +34,49 @@ export const createSchema = async (newSchema, user) => {
   try {
     const curDate = new Date();
     const id = uuidv4();
-    const result = await firestore
+    const schema = {
+      ...newSchema,
+      config: JSON.stringify(newSchema.config),
+      userId: user.id,
+      createdAt: curDate.toISOString(),
+      id,
+    };
+
+    await firestore
       .collection("schemas")
       .doc(id)
-      .set({
-        ...newSchema,
-        config: JSON.stringify(newSchema.config),
-        userId: user.id,
-        createdAt: curDate.toISOString(),
-        id,
-      });
-    console.log({ result });
+      .set(schema);
+
+    return schema;
   } catch (error) {
     console.log(error);
+    return newSchema;
   }
 };
 
 export const updateSchema = async (newSchema) => {
   try {
-    // const id = uuidv4();
+    const schema = {
+      ...newSchema,
+      config: JSON.stringify(newSchema.config),
+    };
+
     const result = await firestore
       .collection("schemas")
       .doc(newSchema.id)
-      .update({
-        ...newSchema,
-        config: JSON.stringify(newSchema.config),
-      });
-    console.log({ result });
+      .update(schema);
+
+    return schema;
   } catch (error) {
     console.log(error);
+    return newSchema;
   }
 };
 
 export const createOrUpdateSchema = async (newSchema, user) => {
-  if (!newSchema.id) {
-    // create
-    createSchema(newSchema, user);
-    return;
-  }
-  // const schema = await getSchemaById(newSchema.id);
-  if (!newSchema) {
-    // create
-    createSchema(newSchema, user);
-    return;
-  }
-  updateSchema(newSchema);
-  // update
-  return;
+  let schema = null;
+  if (!newSchema.id) schema = await createSchema(newSchema, user); 
+  else schema = await updateSchema(newSchema);
+  
+  return normalizeSchema(schema);
 };

@@ -5,7 +5,6 @@ import { Link } from "components";
 
 export const VercelProjectCard = ({ project, user }) => {
   const statusColor = useMemo(() => {
-    console.log(project.latestDeployments?.[0])
     switch (project.latestDeployments?.[0]?.readyState) {
       case "QUEUED":
         return "gray";
