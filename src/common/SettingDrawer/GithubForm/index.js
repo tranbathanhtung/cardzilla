@@ -1,7 +1,7 @@
 import * as React from "react";
 import { memo, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 import {
   Input,
@@ -37,7 +37,6 @@ const normalizeUser = (user) => {
 };
 
 export const GithubForm = memo(() => {
-  const color = useRecoilValue(S.color);
   const [github, setGithub] = useRecoilState(S.github);
   const { register, handleSubmit, control, getValues, reset } = useForm({
     defaultValues: github,
@@ -80,7 +79,7 @@ export const GithubForm = memo(() => {
           />
           <InputRightElement className="w-16 !px-0">
             <Button
-              variantColor={color}
+              variantColor="gray"
               size="sm"
               onClick={handleLoadGithubUsername}
               isLoading={loading}

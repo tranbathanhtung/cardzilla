@@ -1,7 +1,7 @@
 import * as React from "react";
 import { memo, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 import {
   Input,
@@ -28,7 +28,6 @@ const normalizeArticles = (user) => {
 };
 
 export const ArticleForm = memo(() => {
-  const color = useRecoilValue(S.color);
   const [articles] = useRecoilState(S.articles);
   const { register, control, getValues, reset } = useForm({
     defaultValues: { articles },
@@ -68,7 +67,7 @@ export const ArticleForm = memo(() => {
           />
           <InputRightElement className="w-16 !px-0">
             <Button
-              variantColor={color}
+              variantColor="gray"
               size="sm"
               onClick={handleLoadDevUsername}
               isLoading={loading}
