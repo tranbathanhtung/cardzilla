@@ -1,16 +1,30 @@
 const colors = require("./tailwind/colors");
 
-const darkVariants = [
-  "dark",
-  "dark:hover",
-  "dark:focus",
-  "dark:active",
-  "dark:placeholder",
-  "dark:disabled",
-];
-
 module.exports = {
-  purge: [],
+  purge: {
+    enabled: false,
+    content: ["./src/**/*.js"],
+
+    // These options are passed through directly to PurgeCSS
+    options: {
+      whitelistPatterns: [
+        /^bg-/,
+        /^!/,
+        /^text-/,
+        /^border-/,
+        /^max-/,
+        /^min-w-lg/,
+        /^hover:/,
+        /^active:/,
+        /^selected:/,
+        /^dark:/,
+        /^md:/,
+        /^sm:/,
+        /^lg:/,
+        /^xl:/,
+      ], // Retain all classes starting with...
+    },
+  },
   theme: {
     darkSelector: ".mode-dark",
     colors,
@@ -188,4 +202,26 @@ module.exports = {
     },
     require("@tailwindcss/typography"),
   ],
+  corePlugins: {
+    float: false,
+    gridTemplateColumns: false,
+    gridColumn: false,
+    gridColumnStart: false,
+    gridColumnEnd: false,
+    gridTemplateRows: false,
+    gridRow: false,
+    gridRowStart: false,
+    gridRowEnd: false,
+    gap: false,
+    gridAutoFlow: false,
+    backgroundAttachment: false,
+    divideColor: false,
+    divideWidth: false,
+    divideOpacity: false,
+    borderCollapse: false,
+    tableLayout: false,
+    scale: false,
+    skew: false,
+    resize: false,
+  },
 };

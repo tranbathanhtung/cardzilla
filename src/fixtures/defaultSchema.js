@@ -58,6 +58,7 @@ export default {
   name: "",
   title: "",
   description: "",
+  trackingId: "",
   theme: "light",
   color: "teal",
   createdAt: (new Date()).toISOString(),

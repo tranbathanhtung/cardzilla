@@ -35,9 +35,9 @@ export const Deployment = memo(() => {
     formRef.current = methods;
   };
 
-  const handleDeploy = async ({ name, title }) => {
+  const handleDeploy = async ({ name, title, trackingId }) => {
     setVercelLoading(true);
-    const createReactApp = getCreateReactApp({ title, theme });
+    const createReactApp = getCreateReactApp({ title, theme, trackingId });
     const defaultTemplate = getDefaultTemplate(schema);
     const app = [...createReactApp, ...defaultTemplate];
     const { file } = await saveJsZip.create(app);
@@ -49,6 +49,7 @@ export const Deployment = memo(() => {
       ...schema,
       name,
       title,
+      trackingId,
     };
 
     setSchema(newSchema);
@@ -76,11 +77,12 @@ export const Deployment = memo(() => {
 
   const handleSaveDraft = async () => {
     setSaving(true);
-    const { name, title } = formRef.current.getValues();
+    const { name, title, trackingId } = formRef.current.getValues();
     const newSchema = {
       ...schema,
       name,
       title,
+      trackingId,
     };
     setSchema(newSchema);
     await createOrUpdateSchema(newSchema, user);
@@ -184,20 +186,28 @@ export const Deployment = memo(() => {
           defaultValues={{
             title: schema?.title || schema?.config?.profile?.name || "",
             name: schema?.name || "",
+            trackingId: schema?.trackingId || "",
           }}
         >
           <Input
             variant="outline"
             name="title"
-            placeholder="Type your title..."
+            placeholder="Type site title..."
             label="Title"
           />
           <Input
             variant="outline"
             name="name"
-            placeholder="Type your name..."
+            placeholder="Type site name..."
             label="Name"
             helperText="* Your url will be name.vercel.app if it doesn't exist"
+          />
+
+          <Input
+            variant="outline"
+            name="trackingId"
+            placeholder="Tracking ID..."
+            label="Tracking ID"
           />
 
           {vercelLoading && (

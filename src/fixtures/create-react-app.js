@@ -30,6 +30,7 @@ export default function getCreateReactApp({
   title = "",
   description = "",
   theme = "light",
+  trackingId = "",
 }) {
   const themeClass = theme === "dark" ? "mode-dark" : "mode-light";
   return [
@@ -219,6 +220,19 @@ export * from "./Tag";`,
       To begin the development, run \`npm start\` or \`yarn start\`.
       To create a production bundle, use \`npm run build\` or \`yarn build\`.
     -->
+    ${trackingId ? `<script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=${trackingId}"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "${trackingId}");
+  </script>` : ""}
 </body>
 
 </html>`,

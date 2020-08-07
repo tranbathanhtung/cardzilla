@@ -124,9 +124,9 @@ const ProfileStack = memo(() => {
             size="2xl"
             name={profile.name}
             src={profile.avatarURL}
-            className={`object-cover object-center absolute left-1/2 bottom-0 transform -translate-y-16 -translate-x-1/2 border-8 border-solid border-gray-300`}
+            className={`object-cover object-center absolute left-1/2 bottom-0 transform -translate-y-20 -translate-x-1/2 border-8 border-solid border-gray-300`}
           />
-          <h3 className="absolute bottom-0 left-1/2 whitespace-no-wrap transform -translate-x-1/2 -translate-y-4 text-center">
+          <h3 className="absolute bottom-0 left-1/2 whitespace-no-wrap transform -translate-x-1/2 -translate-y-6 text-center">
             {profile.name}
           </h3>
 
@@ -154,13 +154,12 @@ const ProfileStack = memo(() => {
 
           {profile.socials?.length ? (
             <div className="my-2">
-              <ButtonGroup spacing="6" className="flex justify-center">
+              <div className="flex items-center justify-center space-x-4">
                 {profile.socials.map((social, idx) => {
                   const { color, icon: Icon } = getDataFromSocial(social);
                   return (
-                    <Link href={social.link} target="_blank">
+                    <Link href={social.link} target="_blank" key={idx}>
                       <IconButton
-                        key={idx}
                         size="md"
                         variantColor={color}
                         variant="solid"
@@ -172,7 +171,7 @@ const ProfileStack = memo(() => {
                     </Link>
                   );
                 })}
-              </ButtonGroup>
+              </div>
             </div>
           ) : null}
         </div>

@@ -15,7 +15,7 @@ export const Download = memo(() => {
   const schema = useRecoilValue(S.schemaState);
   const theme = useRecoilValue(S.theme);
   const handleDownload = async () => {
-    const createReactApp = getCreateReactApp({ theme });
+    const createReactApp = getCreateReactApp({ theme, title: schema?.title, trackingId: schema?.trackingId });
     const defaultTemplate = getDefaultTemplate(schema);
     const app = [...createReactApp, ...defaultTemplate];
     const { file } = await saveJsZip.create(app);
