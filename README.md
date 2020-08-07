@@ -6,7 +6,7 @@
 
 </div>
 
-<p align="center">Try it now https://cardzilla.app.
+<p align="center">Try it now https://cardzilla.vercel.app
 
 <div align="center">
 
