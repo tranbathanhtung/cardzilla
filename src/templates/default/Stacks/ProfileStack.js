@@ -152,7 +152,7 @@ const ProfileStack = memo(() => {
           </div>
 
           {profile.socials?.length ? (
-            <div className="my-2">
+            <div className="my-4">
               <div className="flex items-center justify-center space-x-4">
                 {profile.socials.map((social, idx) => {
                   const { color, icon: Icon } = getDataFromSocial(social);
@@ -178,7 +178,7 @@ const ProfileStack = memo(() => {
         {profile.skills?.length ? (
           <div className="flex flex-col px-8 py-2">
             <h5 className="uppercase">skills</h5>
-            <div className="flex flex-wrap list-none my-5">
+            <div className="flex flex-wrap list-none my-4">
               {profile.skills.map((skill, idx) => (
                 <div className="mr-2 mb-2" key={idx}>
                   <Tag variantColor={skill.color || "gray"}>
