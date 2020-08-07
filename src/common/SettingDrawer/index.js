@@ -22,7 +22,7 @@ export const SettingDrawer = memo((props) => {
           <Tab className={tabClass}>Contact</Tab>
         </TabList>
 
-        <TabPanels className="my-6 px-4 py-3">
+        <TabPanels className="my-6 px-6 py-5">
           <TabPanel className="focus:outline-none">
             <ProfileForm />
           </TabPanel>

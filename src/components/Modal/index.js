@@ -110,7 +110,7 @@ const ModalCloseButton = forwardRef(
         onClick={onDismiss}
         className={classNames("absolute", className)}
         style={{
-          top: 8,
+          top: 16,
           right: 12,
           ...style,
         }}

@@ -6,6 +6,7 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  DrawerHeader,
 } from "components";
 import { SettingDrawer } from "common/SettingDrawer";
 import { Deployment } from "common/Deployment";
@@ -42,8 +43,9 @@ export const Workspace = memo(() => {
             <Drawer isOpen={true} placement="right" size="full">
               <DrawerOverlay className="z-10" onDismiss={handleClose}>
                 <DrawerContent className="z-20">
-                  <DrawerCloseButton onClick={handleClose} />
-                  <div className="flex bg-gray-100 dark:bg-gray-900 w-full h-full overflow-y-auto overflow-hidden">
+                  <div className="flex flex-col bg-gray-100 dark:bg-gray-900 w-full h-full overflow-y-auto overflow-hidden">
+                    <DrawerHeader>Default Template</DrawerHeader>
+                    <DrawerCloseButton onClick={handleClose} />
                     {child}
                   </div>
                 </DrawerContent>

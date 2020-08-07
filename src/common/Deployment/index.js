@@ -152,7 +152,7 @@ export const Deployment = memo(() => {
 
   return (
     <div className="w-full h-full">
-      <div className="h-16 px-4 py-3 flex items-center justify-between border-b border-l border-solid border-gray-200 dark:border-gray-700">
+      <div className="h-16 px-6 py-5 flex items-center justify-between border-b border-l border-solid border-gray-200 dark:border-gray-700">
         <p className="text-xl text-gray-700 dark:text-gray-200 font-semibold">
           {vercelInfo?.user ? vercelInfo.user.name : "Publish"}
         </p>
@@ -174,7 +174,7 @@ export const Deployment = memo(() => {
           </Button>
         )}
       </div>
-      <div className="my-6 px-4 py-3">
+      <div className="my-6 px-6 py-5">
         <Form
           onSubmit={handleDeploy}
           onFormDidMount={handleFormDidMount}
