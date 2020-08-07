@@ -1,3 +1,4 @@
+// [chakra-ui](https://github.com/chakra-ui/chakra-ui)
 export { default as Avatar } from "./Avatar";
 export { default as Select } from "./Select";
 export { default as Image } from "./Image";
