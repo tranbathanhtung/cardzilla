@@ -1,7 +1,7 @@
+<img src="./public/cardzilla-logo/cover.png" />
+
 <div align="center">
 
-  <img src="./public/cardzilla-logo/default.png" width="300px;" />
-  
   ### Simple profile card builder
 
 </div>
