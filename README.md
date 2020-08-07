@@ -6,11 +6,11 @@
 
 </div>
 
-<p align="center">Try it now https://tailzilla.app.
+<p align="center">Try it now https://cardzilla.app.
 
 <div align="center">
 
-  [Live Demo](https://cardzilla.vercel.app/)
+  [Live Demo](https://tungtbt.vercel.app/)
 
 </div>
 
