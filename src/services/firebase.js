@@ -1,6 +1,7 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/analytics";
 
 import {
   REACT_APP_FIREBASE_API_KEY,
@@ -31,6 +32,8 @@ const provider = new firebase.auth.GithubAuthProvider();
 provider.addScope("user");
 
 const { auth, firestore: fs } = firebase;
+
+firebase.analytics();
 
 const firestore = fs();
 

@@ -5,7 +5,7 @@ import { Header } from "common/Header";
 import { Workspace } from "common/Workspace";
 
 function App() {
-  // TODO: For multiple template
+  // TODO: more templates ?
   // const TemplateChild = useMemo(() => {
   //   switch (template?.name) {
   //     case "default":
