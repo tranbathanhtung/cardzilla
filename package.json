@@ -29,6 +29,7 @@
     "uuid": "^8.3.0"
   },
   "scripts": {
+    "prestart": "postcss src/styles/tailwind.css -o src/styles/index.css",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
