@@ -209,7 +209,7 @@ export const Deployment = memo(() => {
             placeholder="Type site name..."
             label="Name"
             registerOptions={{
-              pattern: /[!@#$%^&*(),?":{}|<>]/g,
+              // pattern: /[!@#$%^&*(),?":{}|<>]/,
               minLength: 4,
               maxLength: 50,
               required: "name is required",
