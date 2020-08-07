@@ -1,30 +1,7 @@
 const colors = require("./tailwind/colors");
 
 module.exports = {
-  purge: {
-    enabled: false,
-    content: ["./src/**/*.js"],
-
-    // These options are passed through directly to PurgeCSS
-    options: {
-      whitelistPatterns: [
-        /^bg-/,
-        /^!/,
-        /^text-/,
-        /^border-/,
-        /^max-/,
-        /^min-w-lg/,
-        /^hover:/,
-        /^active:/,
-        /^selected:/,
-        /^dark:/,
-        /^md:/,
-        /^sm:/,
-        /^lg:/,
-        /^xl:/,
-      ], // Retain all classes starting with...
-    },
-  },
+  purge: [],
   theme: {
     darkSelector: ".mode-dark",
     colors,
