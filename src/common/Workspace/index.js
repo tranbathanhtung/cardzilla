@@ -10,7 +10,6 @@ import {
 } from "components";
 import { SettingDrawer } from "common/SettingDrawer";
 import { Deployment } from "common/Deployment";
-import { ConditionalWrap } from "common/ConditionalWrap";
 import { useWindowSize } from "hooks/useWindowSize";
 import { WORKSPACE } from "constants/workspace";
 import * as S from "selectors";
@@ -34,33 +33,27 @@ export const Workspace = memo(() => {
 
   const handleClose = () => setWorkspace("");
 
-  return (
-    <>
-      {workspace && (
-        <ConditionalWrap
-          condition={width <= 640}
-          whenTrue={(child) => (
-            <Drawer isOpen={true} placement="right" size="full">
-              <DrawerOverlay className="z-10" onDismiss={handleClose}>
-                <DrawerContent className="z-20">
-                  <div className="flex flex-col bg-gray-100 dark:bg-gray-900 w-full h-full overflow-y-auto overflow-hidden">
-                    <DrawerHeader>Default Template</DrawerHeader>
-                    <DrawerCloseButton onClick={handleClose} />
-                    {child}
-                  </div>
-                </DrawerContent>
-              </DrawerOverlay>
-            </Drawer>
-          )}
-          whenFalse={(child) => (
-            <div className="flex bg-gray-100 dark:bg-gray-900 w-md overflow-y-auto overflow-hidden">
-              {child}
+  if (!workspace) return null;
+
+  if (width <= 640) {
+    return (
+      <Drawer isOpen={true} placement="right" size="full">
+        <DrawerOverlay className="z-10" onDismiss={handleClose}>
+          <DrawerContent className="z-20">
+            <div className="flex flex-col bg-gray-100 dark:bg-gray-900 w-full h-full overflow-y-auto overflow-hidden">
+              <DrawerHeader>Default Template</DrawerHeader>
+              <DrawerCloseButton onClick={handleClose} />
+              {Workspace}
             </div>
-          )}
-        >
-          {Workspace}
-        </ConditionalWrap>
-      )}
-    </>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+    );
+  }
+
+  return (
+    <div className="flex bg-gray-100 dark:bg-gray-900 w-md overflow-y-auto overflow-hidden">
+      {Workspace}
+    </div>
   );
 });

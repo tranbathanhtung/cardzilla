@@ -202,12 +202,20 @@ export const Deployment = memo(() => {
             placeholder="Type site title..."
             label="Title"
           />
+
           <Input
             variant="outline"
             name="name"
             placeholder="Type site name..."
             label="Name"
+            registerOptions={{
+              pattern: /[!@#$%^&*(),?":{}|<>]/g,
+              minLength: 4,
+              maxLength: 50,
+              required: "name is required",
+            }}
             helperText="* Your url will be name.vercel.app if it doesn't exist"
+            errorMessage="name can not have whitespaces/special or less then 4 characters"
           />
 
           <Input
