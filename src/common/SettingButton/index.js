@@ -7,7 +7,7 @@ import { IconButton } from "components";
 import { WORKSPACE } from "constants/workspace";
 import * as S from "selectors";
 
-export const Settings = memo(() => {
+export const SettingButton = memo(() => {
   const [workspace, setWorkspace] = useRecoilState(S.workspace);
   const handleWorkspace = () => {
     if (workspace === WORKSPACE.SETTINGS) setWorkspace("");

@@ -1,12 +1,12 @@
 import * as React from "react";
 import { memo } from "react";
 
-import { Download } from "common/Download";
+import { DownloadButton } from "common/DownloadButton";
 import { DeployButton } from "common/DeployButton";
 import { GithubLogin } from "common/GithubLogin";
 import { ThemeSwitcher } from "common/ThemeSwitcher";
 import { ColorPicker } from "common/ColorPicker";
-import { Settings } from "common/Settings";
+import { SettingButton } from "common/SettingButton";
 
 export const Header = memo(() => {
   return (
@@ -14,8 +14,8 @@ export const Header = memo(() => {
       <div className="w-full h-full flex flex-no-wrap justify-between items-center px-4 py-3 space-x-4 overflow-x-auto">
         <div className="flex items-center space-x-4">
           <GithubLogin />
-          <Download />
-          <Settings />
+          <DownloadButton />
+          <SettingButton />
           <DeployButton />
         </div>
         <div className="flex items-center space-x-4">

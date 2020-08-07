@@ -45,12 +45,12 @@ export const ArticleForm = memo(() => {
         username,
         articles: newArticles,
       });
-      reset({ articles: articlesConfig });
+      reset({ articles: [...articles, ...articlesConfig] });
     } catch (err) {
       setLoading(false);
       console.log(err);
     }
-  }, [getValues, reset]);
+  }, [getValues, reset, articles]);
 
   return (
     <form className="space-y-4">

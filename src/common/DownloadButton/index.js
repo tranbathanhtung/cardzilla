@@ -10,7 +10,7 @@ import getCreateReactApp from "fixtures/create-react-app";
 import saveJsZip from "services/saveJsZip";
 import * as S from "selectors";
 
-export const Download = memo(() => {
+export const DownloadButton = memo(() => {
   const schema = useRecoilValue(S.schemaState);
   const theme = useRecoilValue(S.theme);
   const handleDownload = async () => {
@@ -20,6 +20,7 @@ export const Download = memo(() => {
     const { file } = await saveJsZip.create(app);
     saveAs(file, "cardzilla-template.zip");
   };
+  
   return (
     <IconButton
       size="md"
