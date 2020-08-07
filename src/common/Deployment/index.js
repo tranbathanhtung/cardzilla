@@ -82,7 +82,7 @@ export const Deployment = memo(() => {
       trackingId,
     };
     const createdOrUpdatedSchema = await createOrUpdateSchema(newSchema, user);
-    console.log({ createdOrUpdatedSchema })
+    console.log({ createdOrUpdatedSchema });
     setSaving(false);
     setSchema(createdOrUpdatedSchema);
   };
@@ -121,6 +121,17 @@ export const Deployment = memo(() => {
       vercel: null,
     });
   }
+
+  const handleRefreshVercelProject = async () => {
+    setVercelLoading(true);
+    const project = await vercelAPI.fetchProject(user.vercel, schema.name);
+
+    setVercelInfo({
+      ...vercelInfo,
+      project,
+    });
+    setVercelLoading(false);
+  };
 
   useEffect(() => {
     if (!user) {
@@ -213,7 +224,11 @@ export const Deployment = memo(() => {
           )}
 
           {vercelInfo?.project ? (
-            <VercelProjectCard {...vercelInfo} />
+            <VercelProjectCard
+              {...vercelInfo}
+              onRefresh={handleRefreshVercelProject}
+              color={color}
+            />
           ) : (
             <p></p>
           )}

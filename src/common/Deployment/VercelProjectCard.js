@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useMemo } from "react";
 
-import { Link } from "components";
+import { Link, Button } from "components";
 
-export const VercelProjectCard = ({ project, user }) => {
+export const VercelProjectCard = ({ project, user, color, onRefresh }) => {
   const statusColor = useMemo(() => {
     switch (project.latestDeployments?.[0]?.readyState) {
       case "QUEUED":
@@ -30,7 +30,14 @@ export const VercelProjectCard = ({ project, user }) => {
           >
             {project.name}
           </Link>
-
+          <Button
+            size="sm"
+            variantColor={color}
+            variant="ghost"
+            onClick={onRefresh}
+          >
+            Refresh
+          </Button>
         </div>
         <div className="flex flex-1 flex-col items-start mx-6">
           <div className="w-full space-y-4">
