@@ -1,6 +1,5 @@
 import * as React from "react";
 import { memo } from "react";
-import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { Download as DownloadIcon } from "react-feather";
 import { useRecoilValue } from "recoil";
@@ -19,7 +18,6 @@ export const Download = memo(() => {
     const defaultTemplate = getDefaultTemplate(schema);
     const app = [...createReactApp, ...defaultTemplate];
     const { file } = await saveJsZip.create(app);
-    const content = await JSZip.loadAsync(file);
     saveAs(file, "cardzilla-template.zip");
   };
   return (

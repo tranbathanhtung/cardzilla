@@ -92,7 +92,7 @@ export const color = selector({
   key: "color",
   get: ({ get }) => {
     const schema = get(schemaState);
-    if (!schema) return "teal";
+    if (!schema) return "gray";
     return schema.color;
   },
   set: ({ get, set }, color) => {

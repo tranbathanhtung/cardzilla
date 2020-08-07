@@ -4,13 +4,14 @@ import { Settings as SettingsIcon } from "react-feather";
 import { useRecoilState } from "recoil";
 
 import { IconButton } from "components";
+import { WORKSPACE } from "constants/workspace";
 import * as S from "selectors";
 
 export const Settings = memo(() => {
   const [workspace, setWorkspace] = useRecoilState(S.workspace);
   const handleWorkspace = () => {
-    if (workspace === "template.config") setWorkspace("");
-    else setWorkspace("template.config");
+    if (workspace === WORKSPACE.SETTINGS) setWorkspace("");
+    else setWorkspace(WORKSPACE.SETTINGS);
   }
   
   return (

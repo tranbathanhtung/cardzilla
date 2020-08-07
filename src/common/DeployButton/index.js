@@ -4,6 +4,7 @@ import { UploadCloud } from "react-feather";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IconButton } from "components";
+import { WORKSPACE } from "constants/workspace";
 import * as S from "selectors";
 
 export const DeployButton = memo(() => {
@@ -11,8 +12,8 @@ export const DeployButton = memo(() => {
   const [workspace, setWorkspace] = useRecoilState(S.workspace);
 
   const handleWorkspace = () => {
-    if (workspace === "template.deploy") setWorkspace("");
-    else setWorkspace("template.deploy");
+    if (workspace === WORKSPACE.DEPLOYMENT) setWorkspace("");
+    else setWorkspace(WORKSPACE.DEPLOYMENT);
   }
 
   return (

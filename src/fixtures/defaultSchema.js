@@ -4,10 +4,10 @@ const config = {
     badge: "Badge",
     avatarURL:
       "",
-    name: "Mr.Smith",
+    name: "Mr. Smith",
     address: "Address",
     bio:
-      "he/him. Working [@link](https://www.google.com) and [#tag](https://www.google.com)",
+      "Your Bio. Support [@link](https://www.google.com)",
     socials: [
       {
         type: "github",
@@ -28,7 +28,7 @@ const config = {
       {
         name: "Your repository",
         htmlUrl: "",
-        description: "Repository description",
+        description: "Repository's description",
         language: "Javascript",
         languageColor: "#f1e05a",
         star: 0,
@@ -41,7 +41,7 @@ const config = {
     {
       title: "Your article",
       htmlUrl: "",
-      description: "article description",
+      description: "Article's description",
       reaction: 0,
       comment: 0,
     },
@@ -60,7 +60,7 @@ export default {
   description: "",
   trackingId: "",
   theme: "light",
-  color: "teal",
+  color: "gray",
   createdAt: (new Date()).toISOString(),
   config: JSON.stringify(config),
 };

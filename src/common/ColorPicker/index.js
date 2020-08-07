@@ -1,5 +1,5 @@
 import * as React from "react";
-import { memo, useRef } from "react";
+import { memo } from "react";
 import { Check } from "react-feather";
 import { useRecoilState } from "recoil";
 
@@ -15,6 +15,7 @@ import {
 import * as S from "selectors";
 
 const colors = [
+  "gray",
   "red",
   "orange",
   "yellow",
@@ -47,16 +48,16 @@ const ButtonColor = React.forwardRef((props, ref) => {
 
 export const ColorPicker = memo(({ className }) => {
   const [color, setColor] = useRecoilState(S.color);
-  const buttonRef = useRef(null);
 
   return (
-    <Popover closeOnBlur placement="bottom">
+    <Popover closeOnBlur usePortal placement="bottom">
       <PopoverTrigger>
         <IconButton
           variantColor={color}
           role="radio"
           size="sm"
           isRound
+          className={color === "gray" ? "bg-gray-300" : undefined}
         />
       </PopoverTrigger>
       <PopoverContent className="z-10 w-40 border-gray-100 dark:border-gray-700">
@@ -69,7 +70,6 @@ export const ColorPicker = memo(({ className }) => {
             spacing={3}
             isInline
           >
-            <ButtonColor ref={buttonRef} value="gray" className="mb-3" />
             {colors.map((color) => (
               <ButtonColor value={color} key={color} className="mb-3" />
             ))}

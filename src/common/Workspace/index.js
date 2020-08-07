@@ -11,7 +11,7 @@ import { SettingDrawer } from "common/SettingDrawer";
 import { Deployment } from "common/Deployment";
 import { ConditionalWrap } from "common/ConditionalWrap";
 import { useWindowSize } from "hooks/useWindowSize";
-
+import { WORKSPACE } from "constants/workspace";
 import * as S from "selectors";
 
 export const Workspace = memo(() => {
@@ -22,9 +22,9 @@ export const Workspace = memo(() => {
   const Workspace = useMemo(() => {
     if (!schema) return null;
     switch (workspace) {
-      case "template.config":
+      case WORKSPACE.SETTINGS:
         return <SettingDrawer />;
-      case "template.deploy":
+      case WORKSPACE.DEPLOYMENT:
         return <Deployment />;
       default:
         return null;

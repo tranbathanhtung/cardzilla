@@ -61,7 +61,7 @@ export const updateSchema = async (newSchema) => {
       config: JSON.stringify(newSchema.config),
     };
 
-    const result = await firestore
+    await firestore
       .collection("schemas")
       .doc(newSchema.id)
       .update(schema);
